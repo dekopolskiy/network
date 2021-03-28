@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { Redirect, Route } from "react-router";
+import { Route } from "react-router";
 import AnyError from "./AnyError/AnyError";
 
 export default class App extends React.Component {

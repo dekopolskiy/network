@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 class AnyError extends Component {
   render() {
-    return <div>{String(this.props.message)}</div>;
+    return <div>{this.props.message}</div>;
   }
 }
 

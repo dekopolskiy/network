@@ -13,7 +13,7 @@ export const toAuthorize = () => {
         }
       })
       .catch((error) => {
-        dispatch(set_error(error));
+        dispatch(set_error(error.toString()));
       })
       .finally(() => {
         dispatch(set_load(true));
