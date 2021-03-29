@@ -1,5 +1,5 @@
-import { auth_me } from "../RestAPI/axios";
-import { set_error, set_load, set_user } from "./actions_creator";
+import { auth_me, profile } from "../RestAPI/axios";
+import { set_error, set_load, set_user, set_profile } from "./actions_creator";
 
 export const toAuthorize = () => {
   return (dispatch) => {
@@ -17,6 +17,17 @@ export const toAuthorize = () => {
       })
       .finally(() => {
         dispatch(set_load(true));
+      });
+  };
+};
+
+export const get_profile = (userID) => {
+  return (dispatch) => {
+    profile
+      .get_profile(userID)
+      .then(({ data }) => dispatch(set_profile(data)))
+      .catch((error) => {
+        dispatch(set_error(error.toString()));
       });
   };
 };

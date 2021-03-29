@@ -9,3 +9,7 @@ const instance = axios.create({
 });
 
 export const auth_me = instance(`${baseURL}auth/me`)
+
+export const profile = {
+  get_profile: (userID) => instance(`${baseURL}/profile/${userID}`)
+}

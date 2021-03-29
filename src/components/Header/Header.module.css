@@ -1,0 +1,6 @@
+.header{
+    border-bottom: 2px solid rgb(233, 232, 232);
+    flex: 0;
+    flex-basis: 50px;
+    color: white;
+}

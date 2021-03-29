@@ -1,0 +1,6 @@
+.footer{
+    flex: 0;
+    flex-basis: 50px;
+    border-top: 2px solid rgb(233, 232, 232);
+    color: black;
+}

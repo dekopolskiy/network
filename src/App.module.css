@@ -1,0 +1,14 @@
+.main__wrap{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.content__wrap{
+    flex: 1;
+    flex-basis: auto;
+    border:1px solid rgb(209, 208, 208);
+    max-width: 85%;
+    min-width: 85%;
+    align-self: center;
+}
