@@ -17,7 +17,7 @@ export default class App extends React.Component {
       return <div>...Loading</div>;
     }
     return (
-      <div className={styles.main__wrap}>
+      <div className={styles.main__wrap}>{/*flex column 0 1 0 */}
         <Header />
         <div className={styles.content__wrap}>
           <Route exact path="/error" component={AnyError} />
