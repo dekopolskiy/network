@@ -1,6 +1,26 @@
 .header{
+    flex-grow: 0;
     border-bottom: 2px solid rgb(233, 232, 232);
-    flex: 0;
-    flex-basis: 50px;
-    color: white;
+    flex-basis: 45px;
+    display: flex;
+    flex-direction: column;
+}
+
+.container{
+    max-width: 85%;
+    min-width: 85%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav{
+    flex-basis: 25%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav a{
+    text-decoration: none;
+    color: black;
 }

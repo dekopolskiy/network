@@ -2,34 +2,36 @@
     display: flex;
     flex-grow: 1;
 }
-
+/* _________Column Left_______ */
 .list_info{
-    flex-grow: 0.5;
     display: flex;
     flex-direction: column;
-    align-items: center;    
+    flex-basis: 200px;
+    height: 200px;
+    justify-content: space-evenly;
 }
 .list_info a {
     text-decoration: none;
     color: black;
     cursor: pointer;
 }
-
-.avatar{
-    flex-grow: 1;
+/*________INFO_PHOTO_______*/
+.wrap__info__photo{
+    text-align: center;
+    border-radius: 5px;
+    flex-basis: 300px;
+    border: 1px solid rgb(228, 223, 223);
+    box-shadow: 1px 1px 50px rgb(228, 223, 223);
 }
+.wrap__info__photo:hover{
+    transition: 450ms background ease;
+    background: rgb(235, 231, 231);
+}
+
 .avatar{
     text-align: center;
 }
 .wrap__info{
-    flex-grow: 3;
 }
-.wrap__info{
-    display: flex;
-    flex-direction: column;
+.status{
 }
-    .fullname{
-        
-    }
-    .status{}
-    .profile_info{}
