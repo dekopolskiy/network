@@ -1,0 +1,43 @@
+.user {
+    border: 1px solid rgb(228, 223, 223);
+    box-shadow: 1px 1px 50px rgb(228, 223, 223);
+    flex-basis: 50%;
+    box-sizing: border-box;
+    padding: 25px;
+}
+
+.next_view {
+    flex-basis: 25%;
+    transition: 0.5s flex-basis ease;    
+}
+
+.user img{
+    border-radius: 50%;
+}
+
+.user:hover{
+    transition: 450ms background ease;
+    background: rgb(235, 231, 231);
+}
+
+.users{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.users__wrap{
+    margin: auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wrapper__handle{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 15px 0;
+}
+
+.handle__view{
+}
