@@ -1,0 +1,30 @@
+.form{
+    display: flex;
+    flex-direction: column;
+}
+
+.button{
+    border:1px solid rgb(39, 46, 36);
+    color: rgb(86, 158, 52);
+    outline: none;
+    text-align: center;
+    padding: 5px;
+    border-radius: 2px;
+    cursor: pointer;
+    background-color: white;
+}
+
+input{
+    border:none;
+    border-bottom: 1px solid silver;
+    outline: none;
+    width: 50%;
+}
+
+.field{
+    padding: 5px 0;
+}
+
+.error{
+    color: rgb(163, 22, 22);
+}

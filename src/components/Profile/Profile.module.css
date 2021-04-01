@@ -1,29 +1,19 @@
-.container{
-    display: flex;
+.container__main{
     flex-grow: 1;
 }
-/* _________Column Left_______ */
-.list_info{
+.main__wrap{
+    padding-top: 25px;
     display: flex;
-    flex-direction: column;
-    flex-basis: 200px;
-    height: 200px;
-    justify-content: space-evenly;
-}
-.list_info a {
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
 }
 /*________INFO_PHOTO_______*/
-.wrap__info__photo{
+.container__info__photo{
+    flex-basis: 40%;
     text-align: center;
     border-radius: 5px;
-    flex-basis: 300px;
-    border: 1px solid rgb(228, 223, 223);
     box-shadow: 1px 1px 50px rgb(228, 223, 223);
+    height: 550px;
 }
-.wrap__info__photo:hover{
+.container__info__photo:hover{
     transition: 450ms background ease;
     background: rgb(235, 231, 231);
 }
@@ -31,7 +21,15 @@
 .avatar{
     text-align: center;
 }
-.wrap__info{
-}
-.status{
+
+.button{
+    border:1px solid rgb(86, 158, 52);
+    color: rgb(86, 158, 52);
+    outline: none;
+    text-align: center;
+    padding: 5px;
+    border-radius: 2px;
+    cursor: pointer;
+    background-color: white;
+    margin-right: 5px;
 }

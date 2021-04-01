@@ -6,9 +6,9 @@ import { getProfile, getStatus } from "../../redux/thunks_creator";
 
 class ProfileContainer extends Component {
   render() {
-    if (this.props.message) {
-      return <Redirect to="/login" />;
-    }
+    // if (this.props.message) {
+    //   return <Redirect to="/login" />;
+    // }
     return <Profile {...this.props} />;
   }
 }
