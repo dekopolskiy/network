@@ -1,5 +1,12 @@
 import { auth_me, profileHTTP, statusHTTP, usersHTTP } from "../RestAPI/axios";
-import { set_error, set_load, set_user, set_profile, set_status, set_users } from "./actions_creator";
+import {
+  set_error,
+  set_load,
+  set_user,
+  set_profile,
+  set_status,
+  set_users,
+} from "./actions_creator";
 
 export const toAuthorize = () => {
   return (dispatch) => {
@@ -34,21 +41,22 @@ export const getProfile = (userID) => {
 
 export const getStatus = (userID) => {
   return (dispatch) => {
-    statusHTTP.get_status(userID)
-    .then( ({ data }) => dispatch(set_status(data)))
-  }
-}
+    statusHTTP
+      .get_status(userID)
+      .then(({ data }) => dispatch(set_status(data)));
+  };
+};
 
 export const setStatus = (status) => {
   return (dispatch) => {
-    statusHTTP.set_status(status)
-    .then(() => dispatch(set_status(status)))
-  }
-}
+    statusHTTP.set_status(status).then(() => dispatch(set_status(status)));
+  };
+};
 
 export const getUsers = () => {
   return (dispatch) => {
-    usersHTTP.get_users()
-    .then(({ data }) => dispatch(set_users(data.items)))
-  }
-}
+    usersHTTP.get_users().then(({ data }) => {
+      dispatch(set_users(data));
+    });
+  };
+};

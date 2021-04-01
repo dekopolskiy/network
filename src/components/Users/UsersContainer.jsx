@@ -18,7 +18,9 @@ class UsersContainer extends Component {
 
 const mapStateToProps = (state) => {
     return { 
-        users: state.users_.users, 
+        users: state.users_.users,
+        totalUsersCount: state.users_.totalCount,
+        usersOnPage: state.users_.usersOnPage, 
     }
 
 }

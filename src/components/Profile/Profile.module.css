@@ -7,29 +7,14 @@
 }
 /*________INFO_PHOTO_______*/
 .container__info__photo{
-    flex-basis: 40%;
     text-align: center;
+    flex-basis: 40%;
     border-radius: 5px;
     box-shadow: 1px 1px 50px rgb(228, 223, 223);
-    height: 550px;
 }
 .container__info__photo:hover{
     transition: 450ms background ease;
     background: rgb(235, 231, 231);
 }
 
-.avatar{
-    text-align: center;
-}
 
-.button{
-    border:1px solid rgb(86, 158, 52);
-    color: rgb(86, 158, 52);
-    outline: none;
-    text-align: center;
-    padding: 5px;
-    border-radius: 2px;
-    cursor: pointer;
-    background-color: white;
-    margin-right: 5px;
-}

@@ -39,5 +39,19 @@
     padding: 15px 0;
 }
 
-.handle__view{
+.handle__search{
+    flex-basis: 200px;
+    display: flex;
+    border:1px solid rgb(180, 177, 177);    
+    border-radius: 25px;
+    overflow: hidden;
+    flex-basis: 300px;
+}
+.handle__search input{
+    flex-grow: 1;
+    text-align: center;
+    border: none;
+}
+.handle__search img{
+    padding: 10px;
 }
