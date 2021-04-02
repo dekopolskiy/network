@@ -4,11 +4,13 @@
 .main__wrap{
     padding-top: 25px;
     display: flex;
+    justify-content: space-between;
 }
 /*________INFO_PHOTO_______*/
 .container__info__photo{
     text-align: center;
-    flex-basis: 40%;
+    flex-basis: 25%;
+    height: 400px;
     border-radius: 5px;
     box-shadow: 1px 1px 50px rgb(228, 223, 223);
 }
@@ -17,4 +19,7 @@
     background: rgb(235, 231, 231);
 }
 
-
+.category{
+    border: 1px solid black;
+    flex-basis: 25%;
+}

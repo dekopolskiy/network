@@ -9,9 +9,7 @@ class UsersContainer extends Component {
     }
     render() {
         return (
-            <div>
                 <Users {...this.props}/>
-            </div>
         )
     }
 }

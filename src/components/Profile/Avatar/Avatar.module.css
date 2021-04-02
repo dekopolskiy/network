@@ -1,3 +1,6 @@
+.avatar {
+    padding-top: 15px;
+}
 .avatar img{
-    border-radius: 5px;
+    border-radius: 50%;
 }

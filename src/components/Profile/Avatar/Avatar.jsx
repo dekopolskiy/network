@@ -8,10 +8,8 @@ class Avatar extends Component {
     return (
       <>
         <div className={styles.avatar}>
-          <img width="250" src={this.props.photo ? this.props.photo : man} />
-          <br></br>
+          <img width="150" src={this.props.photo ? this.props.photo : man} />
         </div>
-        <Button color="rgb(33, 153, 33)">Upload image</Button>
       </>
     );
   }

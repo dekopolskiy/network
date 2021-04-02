@@ -1,0 +1,29 @@
+.container__posts{
+    flex-basis: 45%;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+}
+.post h3{
+    border-bottom: 1px solid rgb(235, 228, 227);
+}
+
+.post{
+    box-sizing: border-box;
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    transition: 450ms background ease;
+}
+
+.rightButton{
+    align-self: flex-start;
+}
+
+
+
+

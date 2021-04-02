@@ -8,12 +8,12 @@ class Info extends Component {
         return (
             <div className={styles.container}>
                 <div className={styles.profile_info}>
-                    <h3>About me</h3>
                     {aboutMe}
                     {lookingForAJobDescription}
-                    <h3>Contacts</h3>
                     {Object.keys(contacts).map(i => {
-                        return <div key={i}>{i}: {contacts[i] ? contacts[i] : 'empty'}</div>
+                        return contacts[i] ?
+                            <div key={i} className={styles.contacts}>{i}: {contacts[i]}</div>
+                            : null;
                     })}
                 </div>
             </div>
@@ -22,3 +22,4 @@ class Info extends Component {
 }
 
 export default Info;
+

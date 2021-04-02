@@ -4,7 +4,7 @@ import FormInfoProfile from "./Info/Form/FormInfoProfile";
 import Info from "./Info/Info";
 import styles from "./Profile.module.css";
 import Status from "./Status.jsx/Status";
-import Post from "./Post/Post";
+import Posts from "./Posts/Posts";
 import Button from "../../css/Button/Button";
 
 export class Profile extends Component {
@@ -39,11 +39,12 @@ export class Profile extends Component {
               <Info aboutMe={aboutMe}
                 lookingForAJobDescription={lookingForAJobDescription}
                 contacts={contacts} />
-                <Button 
+              <Button
                 color='rgb(86, 158, 52)'
                 onClick={() => this.handleForm(true)}>Edit profile</Button>
             </div>
-            <Post />
+            <Posts />
+            <div className={styles.category}>Category</div>
           </div>
         }
       </div>

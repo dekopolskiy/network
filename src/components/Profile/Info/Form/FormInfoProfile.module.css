@@ -1,6 +1,7 @@
 .form{
     display: flex;
     flex-direction: column;
+    font-size: 18px;
 }
 
 .button{
@@ -19,10 +20,11 @@ input{
     border-bottom: 1px solid silver;
     outline: none;
     width: 50%;
+    font-size: 18px;
 }
 
 .field{
-    padding: 5px 0;
+    padding: 15px 0;
 }
 
 .error{

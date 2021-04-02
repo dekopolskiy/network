@@ -39,7 +39,8 @@ class FormInfoProfile extends React.Component {
                         {Object.keys(contacts).map((i) => {
                             return createField(Field, i, { type: 'text', name: { i } })
                         })}
-                        <Button type='submit' disabled={isSubmitting} color='green'>Edit</Button>
+                        <Button type='submit' disabled={isSubmitting} color='green' width='150'>Edit</Button>
+                        <Button color='grey' width='150'>Back</Button>
                     </Form>
                 }}
             </Formik>

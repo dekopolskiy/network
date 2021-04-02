@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 const Button = styled.button`
 ${(props) => props.color && css`
 background: ${props.color};
+width: ${props.width}px;
 :hover{
     border: 1px solid ${props.color};
     background: white;
@@ -13,7 +14,6 @@ background: ${props.color};
 outline:none;
 border:none;
 color:white;
-width:25%;
 padding:5px;
 `
 

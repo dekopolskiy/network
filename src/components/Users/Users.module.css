@@ -1,3 +1,6 @@
+.container{
+    min-width: 100%;
+}
 .user {
     border: 1px solid rgb(228, 223, 223);
     box-shadow: 1px 1px 50px rgb(228, 223, 223);
