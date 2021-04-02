@@ -39,6 +39,7 @@ class Status extends Component {
             <>
                 {this.state.isEdit ?
                     <input
+                        className={styles.status_input}
                         autoFocus={true}
                         name='status'
                         onChange={this.handleChange}

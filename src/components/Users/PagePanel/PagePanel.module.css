@@ -2,20 +2,22 @@
     font-size: 14px;
     display: flex;
     justify-content: space-between;
-    max-width: 380px;
-    min-width: 380px;
+    width: 30%;
 }
 
 .pagePanel div{
+    border: 0.1px solid rgb(238, 237, 237);
+    border-radius: 5px;
     cursor: pointer;
     box-sizing: border-box;
-    padding: 10px 0;
+    width: 100%;
+    text-align:center;
+    color: #446699;
+    margin-left: 3px;
+    padding:4px;
 }
 
 .pagePanel div:hover{
+    background: rgb(233, 233, 233);
 }
 
-.left{
-}
-.right{
-}

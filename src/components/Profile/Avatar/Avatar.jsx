@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import styles from "./Avatar.module.css";
 import man from "../../../images/man.png";
-import Button from "../../../css/Button/Button";
+import { Loading } from "../../Loading/Loading"
 
 class Avatar extends Component {
   render() {
+    if(!this.props.photo) {
+      return <Loading/>
+    }
     return (
       <>
         <div className={styles.avatar}>

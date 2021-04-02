@@ -16,9 +16,10 @@
 }
 
 .nav{
-    flex-basis: 30%;
+    flex-basis: 25%;
     display: flex;
     justify-content: space-around;
+    margin: auto 0;
 }
 
 .nav a{

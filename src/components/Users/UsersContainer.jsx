@@ -1,30 +1,31 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import Users from './Users';
-import { getUsers } from "../../redux/thunks_creator" 
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import Users from "./Users";
+import { Loading } from "../Loading/Loading"
+import { getUsers } from "../../redux/thunks_creator";
 
 class UsersContainer extends Component {
-    componentDidMount() {
-        this.props.getUsers()
+  componentDidMount() {
+    this.props.getUsers();
+  }
+  render() {
+    if (!this.props.users.length) {
+      return <Loading/>;
     }
-    render() {
-        return (
-                <Users {...this.props}/>
-        )
-    }
+    return <Users {...this.props} />;
+  }
 }
 
 const mapStateToProps = (state) => {
-    return { 
-        users: state.users_.users,
-        totalUsersCount: state.users_.totalCount,
-        usersOnPage: state.users_.usersOnPage, 
-    }
-
-}
+  return {
+    users: state.users_.users,
+    totalUsersCount: state.users_.totalCount,
+    usersOnPage: state.users_.usersOnPage,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
-    getUsers: () => dispatch(getUsers()),
-})
+  getUsers: () => dispatch(getUsers()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);

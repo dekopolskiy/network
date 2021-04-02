@@ -14,7 +14,7 @@ width: ${props.width}px;
 outline:none;
 border:none;
 color:white;
-padding:5px;
+padding:7px;
 `
 
 export default Button;

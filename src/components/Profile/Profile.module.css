@@ -12,7 +12,7 @@
     flex-basis: 25%;
     height: 400px;
     border-radius: 5px;
-    box-shadow: 1px 1px 50px rgb(228, 223, 223);
+    box-shadow: 1px 1px 10px rgb(228, 223, 223);
 }
 .container__info__photo:hover{
     transition: 450ms background ease;

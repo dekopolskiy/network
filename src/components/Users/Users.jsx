@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-// import { FaSortAmountDown } from "react-icons/fa";
-import PagePanel from "./PagePanel/PagePanel";
+import sortUp from "../../images/sortUp.png";
+import sortDown from "../../images/sortDown.png";
 import logo from "../../images/man.png";
-import view_grid_4 from "../../images/grid-view-icon-21.jpg";
-import view_grid_6 from "../../images/grid-view-icon-28.jpg";
+import view_grid_4 from "../../images/thumb4.png";
+import view_grid_9 from "../../images/thumb9.png";
 import search from "../../images/search2.jpg";
-// import { FaSortAmountUpAlt } from 'react-icons/fa';
+import PagePanel from "./PagePanel/PagePanel";
 import styles from "./Users.module.css";
 import classnames from "classnames";
 
@@ -40,45 +40,61 @@ class Users extends Component {
 
   sortUsers = (param) => {
     const sort = {
-      sortUp: (a, b) => a.id > b.id ? 1 : -1,
-      sortDown: (a, b) => a.id > b.id ? -1 : 1,
-    }
+      sortUp: (a, b) => (a.id > b.id ? 1 : -1),
+      sortDown: (a, b) => (a.id > b.id ? -1 : 1),
+    };
 
     this.setState({
-      users: [...this.props.users.sort(sort[param])]
-    })
-  }
+      users: [...this.props.users.sort(sort[param])],
+    });
+  };
 
   render() {
     const { totalUsersCount, usersOnPage } = this.props;
     const { flags, users } = this.state;
     return (
       <div className={styles.container}>
-        <div className={styles.handle__search}>
-          <img src={search} width="15" />
-          <input
-            type="text"
-            onChange={this.searchUsers}
-            placeholder="Search by name"
-          />
-        </div>
-
         <div className={styles.wrapper__handle}>
-          <div className={styles.handle__view} onClick={this.handleViewChange}>
-            {flags.isChangeView ? (
-              <img src={view_grid_4} width="25" />
-            ) : (
-              <img src={view_grid_6} width="30" />
-            )}
+          {/*________VIEW SELECT____________ */}
+          <div className={styles.wrapper__leftside__control}>
+            <div
+              className={styles.handle__view}
+              onClick={this.handleViewChange}
+            >
+              {flags.isChangeView ? (
+                <img src={view_grid_4} width="17" />
+              ) : (
+                <img src={view_grid_9} width="17" />
+              )}
+            </div>
+            {/*________SORT____________ */}
+            <div onClick={() => this.sortUsers("sortDown")}>
+              <img src={sortDown} alt="sortDown" width="17" />
+            </div>
+            <div onClick={() => this.sortUsers("sortUp")}>
+              <img src={sortUp} alt="sortUp" width="17" />
+            </div>
           </div>
-          <div onClick={() => this.sortUsers('sortUp')}>SORTUP</div>
-          <div onClick={() => this.sortUsers('sortDown')}>SORTDOWN</div>
+          <div className={styles.wrapper__rightside__control}>
+          {/*________SEARCH____________ */}
+          <div className={styles.handle__search}>
+              <img src={search} width="20" />
+              <input
+                type="text"
+                onChange={this.searchUsers}
+                placeholder="Search by name"
+              />
+            </div>
+
+          {/*_______PAGINATOR____________ */}
           <PagePanel
             totalCountUsers={totalUsersCount}
             usersOnPage={usersOnPage}
           />
         </div>
+        </div>
         <div className={styles.users}>
+          {/*________USERS____________ */}
           <div className={styles.users__wrap}>
             {users.map((i) => {
               return (
@@ -92,7 +108,7 @@ class Users extends Component {
                   <div>
                     <img
                       src={i.photos.large ? i.photos.large : logo}
-                      width="150"
+                      width="200"
                       alt="empty"
                     />
                   </div>

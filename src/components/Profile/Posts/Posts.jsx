@@ -14,24 +14,6 @@ export class Posts extends Component {
                     </div>
                     <Button color='#eb6d4a' className={styles.rightButton}>Learn more</Button>
                 </div>
-                <div className={styles.post}>
-                    <h3>Title</h3>
-                    <div className={styles.content}>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium dignissimos
-                            sit placeat cumque reiciendis est id. Deserunt assumenda molestias sapiente nostrum!</p>
-                    </div>
-                    <Button color='#eb6d4a' className={styles.rightButton}>Learn more</Button>
-                </div>
-                <div className={styles.post}>
-                    <h3>Title</h3>
-                    <div className={styles.content}>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium dignissimos
-                            sit placeat cumque reiciendis est id. Deserunt assumenda molestias sapiente nostrum!</p>
-                    </div>
-                    <Button color='#eb6d4a' className={styles.rightButton}>Learn more</Button>
-                </div>
-
-
             </div>
         )
     }
