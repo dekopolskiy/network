@@ -53,10 +53,10 @@ export const setStatus = (status) => {
   };
 };
 
-export const getUsers = () => {
+export const getUsers = (page, usersOnPage) => {
   return (dispatch) => {
-    usersHTTP.get_users().then(({ data }) => {
-      dispatch(set_users(data));
+    usersHTTP.get_users(page, usersOnPage).then(({ data }) => {
+      dispatch(set_users({ data, page, usersOnPage }));
     });
   };
 };

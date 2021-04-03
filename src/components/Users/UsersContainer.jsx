@@ -6,7 +6,7 @@ import { getUsers } from "../../redux/thunks_creator";
 
 class UsersContainer extends Component {
   componentDidMount() {
-    this.props.getUsers();
+    this.props.getUsers(1);
   }
   render() {
     if (!this.props.users.length) {
@@ -17,15 +17,14 @@ class UsersContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
+  debugger
   return {
     users: state.users_.users,
-    totalUsersCount: state.users_.totalCount,
-    usersOnPage: state.users_.usersOnPage,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  getUsers: () => dispatch(getUsers()),
+  getUsers: (page) => dispatch(getUsers(page)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);

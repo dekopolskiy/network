@@ -21,3 +21,16 @@
     background: rgb(233, 233, 233);
 }
 
+.current{
+    background: rgb(233, 233, 233);
+}
+
+.select{
+    display: flex;
+}
+.select select{
+    border: none;
+    background-color: white;
+    outline: none;
+    color:#446699;
+}

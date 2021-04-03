@@ -20,6 +20,6 @@ export const statusHTTP = {
 }
 
 export const usersHTTP = {
-  get_users: () => instance(`${baseURL}/users?count=50&page=1`),
+  get_users: (page, count) => instance(`${baseURL}/users?count=${count}&page=${page}`),
 }
 

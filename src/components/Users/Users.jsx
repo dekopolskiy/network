@@ -5,7 +5,7 @@ import logo from "../../images/man.png";
 import view_grid_4 from "../../images/thumb4.png";
 import view_grid_9 from "../../images/thumb9.png";
 import search from "../../images/search2.jpg";
-import PagePanel from "./PagePanel/PagePanel";
+import  PagePanelContainer  from "./PagePanel/PagePanelContainer";
 import styles from "./Users.module.css";
 import classnames from "classnames";
 
@@ -50,7 +50,6 @@ class Users extends Component {
   };
 
   render() {
-    const { totalUsersCount, usersOnPage } = this.props;
     const { flags, users } = this.state;
     return (
       <div className={styles.container}>
@@ -87,10 +86,7 @@ class Users extends Component {
             </div>
 
           {/*_______PAGINATOR____________ */}
-          <PagePanel
-            totalCountUsers={totalUsersCount}
-            usersOnPage={usersOnPage}
-          />
+          <PagePanelContainer/>
         </div>
         </div>
         <div className={styles.users}>
