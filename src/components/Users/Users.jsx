@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import sortUp from "../../images/sortUp.png";
-import sortDown from "../../images/sortDown.png";
 import logo from "../../images/man.png";
-import view_grid_4 from "../../images/thumb4.png";
-import view_grid_9 from "../../images/thumb9.png";
-import search from "../../images/search2.jpg";
-import  PagePanelContainer  from "./PagePanel/PagePanelContainer";
+import PagePanelContainer from "./PagePanel/PagePanelContainer";
 import styles from "./Users.module.css";
 import classnames from "classnames";
+import SwitchView from "./SwitchView/SwitchView";
+import Sort from "./Sort/Sort";
+import Search from "./Search/Search";
 
 class Users extends Component {
   constructor(props) {
@@ -53,52 +51,27 @@ class Users extends Component {
     const { flags, users } = this.state;
     return (
       <div className={styles.container}>
-        <div className={styles.wrapper__handle}>
-          {/*________VIEW SELECT____________ */}
-          <div className={styles.wrapper__leftside__control}>
-            <div
-              className={styles.handle__view}
-              onClick={this.handleViewChange}
-            >
-              {flags.isChangeView ? (
-                <img src={view_grid_4} width="17" />
-              ) : (
-                <img src={view_grid_9} width="17" />
-              )}
-            </div>
-            {/*________SORT____________ */}
-            <div onClick={() => this.sortUsers("sortDown")}>
-              <img src={sortDown} alt="sortDown" width="17" />
-            </div>
-            <div onClick={() => this.sortUsers("sortUp")}>
-              <img src={sortUp} alt="sortUp" width="17" />
-            </div>
+        <div className={styles.сontrolPanel}>
+          <div className={styles.controlPanel__leftside}>
+            <SwitchView handleViewChange={this.handleViewChange} flags={flags}/>
+            <Sort sortUsers={this.sortUsers} />
           </div>
-          <div className={styles.wrapper__rightside__control}>
-          {/*________SEARCH____________ */}
-          <div className={styles.handle__search}>
-              <img src={search} width="20" />
-              <input
-                type="text"
-                onChange={this.searchUsers}
-                placeholder="Search by name"
-              />
+          <div className={styles.controlPanel__rightside}>
+            <div className={styles.rightside__search}>
+              <Search searchUsers={this.searchUsers} />
             </div>
-
-          {/*_______PAGINATOR____________ */}
-          <PagePanelContainer/>
+            <PagePanelContainer />
+          </div>
         </div>
-        </div>
-        <div className={styles.users}>
-          {/*________USERS____________ */}
-          <div className={styles.users__wrap}>
+        <div className={styles.listUsers}>
+          <div className={styles.listUsers_wrap}>
             {users.map((i) => {
               return (
                 <div
                   key={i.id}
                   className={classnames(
-                    styles.user,
-                    flags.isChangeView ? styles.next_view : null
+                    styles.listUsers__user,
+                    flags.isChangeView ? styles.new_width : null
                   )}
                 >
                   <div>

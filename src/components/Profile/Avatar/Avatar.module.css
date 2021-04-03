@@ -1,8 +1,8 @@
 .avatar {
     padding-top: 15px;
-    border-bottom: 1px solid rgb(226, 226, 226);
-    min-height: 40%;
+    min-height: 30%;
 }
 .avatar img{
     border-radius: 50%;
+    border: 7px solid rgb(255, 255, 255);
 }

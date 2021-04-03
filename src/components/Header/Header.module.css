@@ -8,8 +8,8 @@
 }
 
 .container{
-    max-width: 85%;
-    min-width: 85%;
+    max-width: 90%;
+    min-width: 90%;
     margin: auto;
     display: flex;
     justify-content: space-between;

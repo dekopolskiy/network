@@ -25,7 +25,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getProfile: (userID) => dispatch(getProfile(userID)),
-    getStatus: (userID) => dispatch(getStatus(userID)),
   }
 };
 

@@ -6,6 +6,8 @@ import {
   set_profile,
   set_status,
   set_users,
+  set_page_info,
+  set_avatar,
 } from "./actions_creator";
 
 export const toAuthorize = () => {
@@ -53,10 +55,20 @@ export const setStatus = (status) => {
   };
 };
 
-export const getUsers = (page, usersOnPage) => {
+export const getUsers = ({page = 1, usersOnPage = 20}) => {
   return (dispatch) => {
     usersHTTP.get_users(page, usersOnPage).then(({ data }) => {
-      dispatch(set_users({ data, page, usersOnPage }));
+      dispatch(set_users({ data }));
+      dispatch(set_page_info({ page, usersOnPage }))
     });
   };
 };
+
+export const setAvatar = (image) => {
+    return (dispatch) => {
+      usersHTTP.set_avatar(image)
+      .then((response) => {
+        dispatch(set_avatar({...response.data.data.photos}));
+      })
+    }
+}

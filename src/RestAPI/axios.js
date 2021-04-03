@@ -11,15 +11,16 @@ const instance = axios.create({
 export const auth_me = instance(`${baseURL}auth/me`)
 
 export const profileHTTP = {
-  get_profile: (userID) => instance(`${baseURL}/profile/${userID}`)
+  get_profile: ( userID ) => instance(`${baseURL}profile/${userID}`)
 }
 
 export const statusHTTP = {
-  get_status: (userID) => instance(`${baseURL}/profile/status/${userID}`),
-  set_status: (status) => instance.put(`${baseURL}/profile/status`, { status }),
+  get_status: ( userID ) => instance(`${baseURL}profile/status/${userID}`),
+  set_status: ( status ) => instance.put(`${baseURL}profile/status`, { status }),
 }
 
 export const usersHTTP = {
-  get_users: (page, count) => instance(`${baseURL}/users?count=${count}&page=${page}`),
+  get_users: ( page, count ) => instance(`${baseURL}users?count=${count}&page=${page}`),
+  set_avatar: ( image ) => instance.put(`${baseURL}profile/photo`, image)
 }
 

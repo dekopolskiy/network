@@ -6,8 +6,8 @@
 
 .content__wrap{
     flex-grow: 1;
-    max-width: 85%;
-    min-width: 85%;
+    max-width: 90%;
+    min-width: 90%;
     align-self: center;
     display: flex;
     height: 100%;

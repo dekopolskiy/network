@@ -17,7 +17,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return { 
-        getUsers: (page, count) => dispatch(getUsers(page, count)),
+        getUsers: ({page, perPage: usersOnPage}) => dispatch(getUsers({page, usersOnPage})),
     }
 }
 

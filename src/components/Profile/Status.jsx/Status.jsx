@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setStatus } from '../../../redux/thunks_creator'
+import { getStatus, setStatus } from '../../../redux/thunks_creator'
 import styles from "./Status.module.css"
 
 class Status extends Component {
@@ -11,7 +11,9 @@ class Status extends Component {
             status: this.props.status,
         }
     }
-
+    componentDidMount() {
+        this.props.getStatus(this.props.userID);
+    }
     componentDidUpdate(prevPR, prevST) {
         if (prevPR !== this.props) {
             this.setState({ status: this.props.status })
@@ -59,6 +61,7 @@ class Status extends Component {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        getStatus: (userID) => dispatch(getStatus(userID)), 
         setStatus: (status) => dispatch(setStatus(status)),
     }
 }

@@ -2,13 +2,13 @@ import React from "react";
 import styles from "./PagePanel.module.css";
 import { useState, useEffect } from "react";
 
-const PagePanel = ({ pageInfo : { totalCount, usersOnPage, currentPage, count: perPageCount } , getUsers }) => {
+const PagePanel = ({ pageInfo : { totalCount, usersOnPage, currentPage } , getUsers }) => {
+  const [pages, setPages] = useState([]);
+  const pagesLength = Math.ceil(totalCount / usersOnPage);
   const [step, setStep] = useState({ left: 0, right: 5 });
   const [page, setPage] = useState(1);
-  const [pages, setPages] = useState([]);
-  const [perPage, setPerPage] = useState(20)
-  const pagesLength = Math.ceil(totalCount / usersOnPage);
-  console.log(usersOnPage)
+  const [perPage, setPerPage] = useState(20);
+
   useEffect(() => {
     let allPages = [];
     for (let i = 1; i <= pagesLength; i++) {
@@ -21,14 +21,15 @@ const PagePanel = ({ pageInfo : { totalCount, usersOnPage, currentPage, count: p
     if(currentPage === page ) {
       return null;
     }
-      getUsers(page, perPageCount)
+      getUsers({page, perPage})
   }, [page]);
 
+  
   useEffect(() => {
-    if(perPage === perPageCount) {
+    if(perPage === usersOnPage) {
       return null;
     }
-    getUsers(page, perPageCount);
+    getUsers({page, perPage});
   }, [perPage])
 
   const pagesMove = (stepValue) => {
@@ -42,12 +43,18 @@ const PagePanel = ({ pageInfo : { totalCount, usersOnPage, currentPage, count: p
   };
 
   const handleSelect = (e) => {
+      e.persist();
       setPerPage(e.target.value)
   }
 
+  const changePage = (pageValue) => {
+    if(pageValue === page) return null;
+    setPage(pageValue);
+  }
+  
   return (
     <div className={styles.pagePanel}>
-      <div>First</div>
+      <div onClick={ () => changePage(1) }>First</div>
       <div className={styles.left} onClick={ () => pagesMove(-5) }>
         Prev
       </div>
@@ -55,15 +62,15 @@ const PagePanel = ({ pageInfo : { totalCount, usersOnPage, currentPage, count: p
       .slice(step.left, step.right)
       .map((i) => (
         <div key={i}
-        className={currentPage === i && styles.current } 
+        className={currentPage === i? styles.current: null } 
         onClick={ () => setPage(i) }>{i}</div>
       ))}
       <div className={styles.right} onClick={ () => pagesMove(5) }>
         Next
       </div>
-      <div>Last</div>
+      <div onClick={ () => changePage(pagesLength) }>Last</div>
       <div className={styles.select}> 
-        <select name="" id="" onChange={(e) => setPerPage(e.target.value)}>
+        <select name="" id="" onChange={handleSelect}>
           <option value="20">20</option>
           <option value="50">50</option>
           <option value="100">100</option>

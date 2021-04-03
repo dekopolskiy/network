@@ -1,35 +1,19 @@
 import React, { Component } from "react";
 import styles from "./Info.module.css";
-import Button from "../../../css/Button/Button";
 
 class Info extends Component {
   render() {
     const { aboutMe, lookingForAJobDescription, contacts, fullName } = this.props;
     return (
-      <div className={styles.container}>
-        <div className={styles.profile_info}>
-          <h3>{fullName}</h3>
-          {aboutMe}
-          {lookingForAJobDescription}
+      <div className={styles.info}>
+        <div className={styles.info__name}><h3>{fullName}</h3></div>
+        <div className={styles.info__aboutMe}>{aboutMe}</div>
+        <div className={styles.info__contacts}><h3>Contacts info</h3>
           {Object.keys(contacts).map((i) => {
-            return contacts[i] ? (
-              <div key={i} className={styles.contacts}>
-                {i}: {contacts[i]}
-              </div>
-            ) : null;
+            return <div key={i}>
+              {i}: <br></br>{contacts[i]}
+            </div>
           })}
-          <Button
-            color="#446699"
-            onClick={() => this.props.handleForm(true)}
-          >
-            Edit profile
-          </Button>
-          <Button
-            color="#446600"
-            onClick={() => this.props.handleForm(true)}
-          >
-            Upload Avatar
-          </Button>
         </div>
       </div>
     );

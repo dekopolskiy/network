@@ -5,6 +5,7 @@ import Info from "./Info/Info";
 import styles from "./Profile.module.css";
 import Status from "./Status.jsx/Status";
 import Posts from "./Posts/Posts";
+import Settings from "./Settings/Settings";
 
 export class Profile extends Component {
   constructor(props) {
@@ -16,7 +17,6 @@ export class Profile extends Component {
 
   componentDidMount() {
     this.props.getProfile(this.props.userID);
-    this.props.getStatus(this.props.userID);
   }
 
   handleForm = (flag) => {
@@ -25,37 +25,24 @@ export class Profile extends Component {
 
   render() {
     const {
-      profile: {
-        photos,
-        fullName,
-        aboutMe,
-        lookingForAJobDescription,
-        contacts,
-      },
-      status,
-    } = this.props;
+      profile: { photos, fullName, aboutMe,
+        lookingForAJobDescription, contacts, }, status, } = this.props;
+        
     return (
-      <div className={styles.container__main}>
+      <div className={styles.container}>
         {this.state.isEnable ? (
-          <FormInfoProfile
-            {...this.props.profile}
-            handleForm={this.handleForm}
-          />
+          <FormInfoProfile {...this.props.profile} handleForm={this.handleForm}/>
         ) : (
-          <div className={styles.main__wrap}>
-            <div className={styles.container__info__photo}>
-            <Status status={status} />
+          <div className={styles.profile}>
+            <div className={styles.profile__info}>
+              {/* <Status userID={this.props.userID}/> */}
               <Avatar photo={photos.large} />
-              <Info
-                fullName={fullName}
-                aboutMe={aboutMe}
-                lookingForAJobDescription={lookingForAJobDescription}
-                contacts={contacts}
-                handleForm={this.handleForm}
-              />
+              <Settings handleForm={this.handleForm}/>
+              <Info fullName={fullName} aboutMe={aboutMe} lookingForAJobDescription={lookingForAJobDescription}
+                contacts={contacts} handleForm={this.handleForm}/>
             </div>
             <Posts />
-            <div className={styles.category}>Category</div>
+            <div className={styles.profile__category}>Category</div>
           </div>
         )}
       </div>

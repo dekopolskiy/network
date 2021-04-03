@@ -6,7 +6,7 @@ import { getUsers } from "../../redux/thunks_creator";
 
 class UsersContainer extends Component {
   componentDidMount() {
-    this.props.getUsers(1);
+    this.props.getUsers({});
   }
   render() {
     if (!this.props.users.length) {
@@ -17,7 +17,6 @@ class UsersContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  debugger
   return {
     users: state.users_.users,
   };

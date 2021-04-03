@@ -1,4 +1,5 @@
 export const SET_USERS = "network/users/SET_USERS";
+export const SET_PAGE_INFO = "network/users/SET_PAGE_INFO";
 const initialState = {
     users: [],
     pageInfo: {
@@ -15,9 +16,15 @@ export const users_ = (state = initialState, { type, payload }) => {
             users: [ ...payload.data.items ],
             pageInfo: { 
                 totalCount: payload.data.totalCount,
-                currentPage: payload.page,
-                usersOnPage: payload.usersOnPage,
             }
+        }
+    case SET_PAGE_INFO:
+        return {
+            ...state,
+            pageInfo: {
+                ...state.pageInfo,
+                currentPage: payload.page,
+                usersOnPage: payload.usersOnPage,            }
         }
 
     default:

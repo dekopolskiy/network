@@ -1,4 +1,5 @@
 export const SET_PROFILE = "network/profile/SET_PROFILE";
+export const SET_AVATAR = "network/profile/SET_AVATAR";
 
 const initialState = {
   aboutMe: "",
@@ -26,7 +27,11 @@ export const profile_ = (state = initialState, { type, payload }) => {
   switch (type) {
     case SET_PROFILE:
       return { ...state, ...payload };
-
+    case SET_AVATAR:
+      return {
+        ...state,
+        photos: { ...payload }
+      }
     default:
       return state;
   }

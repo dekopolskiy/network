@@ -1,8 +1,9 @@
 .status{
-    color: slategrey;
     padding: 5px;
+    background: rgb(235, 231, 231);
 }
 .status_input{
+    width: 100%;
     border:none;
     outline: none;
     font-size: 14px;
