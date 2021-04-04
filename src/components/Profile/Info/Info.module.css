@@ -21,3 +21,7 @@
     color: #00D5FF;
     padding-top: 5px;
 }
+
+.info__name{
+    letter-spacing: 1px;
+}

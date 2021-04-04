@@ -6,17 +6,21 @@
     padding-top: 25px;
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 
 .profile__info{
+    flex-shrink: 1;
     text-align: center;
-    flex-basis: 25%;
+    flex-shrink: 1;
+    flex-grow: 1;
     border-right: 1px solid rgb(204, 204, 204);
 }
 
 .profile__category{
     border-left: 1px solid rgb(204, 204, 204);
-    flex-basis: 25%;
+    flex-shrink: 1;
+    flex-grow: 1;
 }
 
 

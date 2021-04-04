@@ -1,5 +1,6 @@
 .header{
     flex-grow: 0;
+    flex-shrink: 0;
     border-bottom: 2px solid rgb(233, 232, 232);
     flex-basis: 45px;
     display: flex;
@@ -25,5 +26,6 @@
 .nav a{
     text-decoration: none;
     color:white;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 900;
 }

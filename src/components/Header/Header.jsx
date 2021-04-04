@@ -9,7 +9,7 @@ export class Header extends Component {
     return (
       <div className={styles.header}>
         <div className={styles.container}>
-          <div className={styles.logo}><img src={logo} alt='empty' height='30'/></div>
+          <div className={styles.logo}><h1>I F E</h1></div>
           <div className={styles.nav}>
             <NavLink to='/users'>Users</NavLink>
             <NavLink to='/'>Contacts</NavLink>

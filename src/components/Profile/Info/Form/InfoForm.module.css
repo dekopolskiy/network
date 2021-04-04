@@ -1,0 +1,32 @@
+.infoForm{
+    /* flex-basis: 45%; */
+    flex-grow: 1;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 550px;
+}
+
+.infoForm__item{
+    max-width: 40%;
+    padding: 15px;
+}
+
+.infoForm__item input {
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 5px;
+    background-color: rgb(228, 220, 220);
+    border-radius: 5px;
+    color: #446699;
+}
+
+.controlPanelButtons{
+    display: flex;
+    justify-content: center;
+}
+.controlPanelButtons button{
+    margin-left: 1px;
+}

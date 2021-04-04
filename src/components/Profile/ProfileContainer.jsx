@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import { Profile } from "./Profile";
-import { getProfile, getStatus } from "../../redux/thunks_creator";
+import { getProfile, getStatus, setProfile } from "../../redux/thunks_creator";
 
 class ProfileContainer extends Component {
   render() {
@@ -25,6 +25,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getProfile: (userID) => dispatch(getProfile(userID)),
+    setProfile: (data, setErrors, setSubmitting) => dispatch(setProfile(data, setErrors, setSubmitting)),
   }
 };
 

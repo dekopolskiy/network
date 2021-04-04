@@ -41,6 +41,36 @@ export const getProfile = (userID) => {
   };
 };
 
+export const setProfile = (data, setErrors, setSubmitting) => {
+  return (dispatch) => {
+    profileHTTP
+      .set_profile(data)
+      .then(({ data: { messages, resultCode } }) => {
+        if (resultCode === 0) {
+          dispatch(set_profile(data))
+        } else {
+          throw new Error(messages);
+        }
+      })
+      .catch((e) => {//'error. (AboutMe), error. (FullName)'
+        
+        const errors = e.message.split(',').reduce((prev, item) => {//["error. (AboutMe)", "error. (FullName)"]
+            console.log(item)
+            let key = item.match(/\((.+?)\)/)[1];
+            let value = item.match(/.+?\./i)[0];
+            prev[key[0].toLowerCase() + key.slice(1)] = value;
+            return prev;
+        }, {} ); 
+        setErrors(errors);
+      })
+      .finally(() => {
+        setSubmitting(false);
+      })
+  };
+};
+// Error: The FullName field is required. (FullName)
+
+
 export const getStatus = (userID) => {
   return (dispatch) => {
     statusHTTP
@@ -55,7 +85,7 @@ export const setStatus = (status) => {
   };
 };
 
-export const getUsers = ({page = 1, usersOnPage = 20}) => {
+export const getUsers = ({ page = 1, usersOnPage = 20 }) => {
   return (dispatch) => {
     usersHTTP.get_users(page, usersOnPage).then(({ data }) => {
       dispatch(set_users({ data }));
@@ -65,10 +95,10 @@ export const getUsers = ({page = 1, usersOnPage = 20}) => {
 };
 
 export const setAvatar = (image) => {
-    return (dispatch) => {
-      usersHTTP.set_avatar(image)
+  return (dispatch) => {
+    usersHTTP.set_avatar(image)
       .then((response) => {
-        dispatch(set_avatar({...response.data.data.photos}));
+        dispatch(set_avatar({ ...response.data.data.photos }));
       })
-    }
+  }
 }

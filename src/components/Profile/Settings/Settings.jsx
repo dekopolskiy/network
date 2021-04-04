@@ -42,10 +42,6 @@ class Settings extends Component {
 }
 
 
-const mapStateToProps = (state) => ({
-    
-})
-
 const mapDispatchToProps = (dispatch) => {
     return {
         setAvatar: ( image ) => {dispatch(setAvatar(image))}

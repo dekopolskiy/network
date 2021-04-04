@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Avatar from "./Avatar/Avatar";
-import FormInfoProfile from "./Info/Form/FormInfoProfile";
+import InfoForm from "./Info/Form/InfoForm";
 import Info from "./Info/Info";
 import styles from "./Profile.module.css";
 import Status from "./Status.jsx/Status";
@@ -26,13 +26,10 @@ export class Profile extends Component {
   render() {
     const {
       profile: { photos, fullName, aboutMe,
-        lookingForAJobDescription, contacts, }, status, } = this.props;
+        lookingForAJobDescription, contacts, }, status, setProfile } = this.props;
         
     return (
       <div className={styles.container}>
-        {this.state.isEnable ? (
-          <FormInfoProfile {...this.props.profile} handleForm={this.handleForm}/>
-        ) : (
           <div className={styles.profile}>
             <div className={styles.profile__info}>
               {/* <Status userID={this.props.userID}/> */}
@@ -41,10 +38,13 @@ export class Profile extends Component {
               <Info fullName={fullName} aboutMe={aboutMe} lookingForAJobDescription={lookingForAJobDescription}
                 contacts={contacts} handleForm={this.handleForm}/>
             </div>
+            {this.state.isEnable ? 
+            <InfoForm {...this.props.profile} handleForm={this.handleForm} setProfile={setProfile}/>
+            : 
             <Posts />
+            }
             <div className={styles.profile__category}>Category</div>
           </div>
-        )}
       </div>
     );
   }
