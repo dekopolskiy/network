@@ -1,5 +1,5 @@
 import { SET_USER } from "./reducers/current_user_";
-import { IS_LOAD } from "./reducers/app_";
+import { IS_LOAD } from "./reducers/loading_";
 import { SET_ERROR } from "./reducers/error_"
 import { SET_PROFILE, SET_AVATAR } from "./reducers/profile_";
 import { SET_STATUS } from "./reducers/status_";

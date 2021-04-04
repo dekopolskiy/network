@@ -1,0 +1,12 @@
+.anyError{
+    background: rgb(241, 241, 241);
+    height: 100%;
+    font-size: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.anyError__error{
+    border-left: 1px solid rgb(192, 191, 191);
+}

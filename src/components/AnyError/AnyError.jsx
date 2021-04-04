@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
-
+import styles from "./AnyError.module.css";
 class AnyError extends Component {
   render() {
-    return <div>{this.props.message.match(/Error: (.+)/i)[1]}</div>
+    return <div className={styles.anyError}>
+      <div className={styles.anyError__error}>
+        {this.props.message}
+      </div>
+    </div>
   }
 }
 

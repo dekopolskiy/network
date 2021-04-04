@@ -1,16 +1,18 @@
 .infoForm{
-    /* flex-basis: 45%; */
-    flex-grow: 1;
-    flex-shrink: 0;
+    flex-basis: 40%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     height: 550px;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
 }
 
 .infoForm__item{
     max-width: 40%;
     padding: 15px;
+    max-height: 50px;
+    min-height: 50px;
 }
 
 .infoForm__item input {
@@ -29,4 +31,8 @@
 }
 .controlPanelButtons button{
     margin-left: 1px;
+}
+
+.item__error{
+    color: rgb(204 21 21);
 }

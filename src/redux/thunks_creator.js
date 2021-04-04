@@ -1,3 +1,4 @@
+import { InvalidFieldsAPI, AuthrorizationError } from "../customErrors/customErrors";
 import { auth_me, profileHTTP, statusHTTP, usersHTTP } from "../RestAPI/axios";
 import {
   set_error,
@@ -13,16 +14,16 @@ import {
 export const toAuthorize = () => {
   return (dispatch) => {
     dispatch(set_load(false));
-    auth_me
+    auth_me //maybe general error example: NETWORK, FORBIDDEN, SERVER
       .then(({ data: { data, resultCode, messages } }) => {
         if (resultCode === 0) {
           dispatch(set_user(data));
-        } else {
-          throw new Error(messages.join(" "));
+        } else { //maybe error from api, but status 200: 
+          throw new AuthrorizationError(messages.join(" "));
         }
       })
-      .catch((error) => {
-        dispatch(set_error(error.toString()));
+      .catch((e) => {
+        dispatch(set_error(e.name, '_', e.message));
       })
       .finally(() => {
         dispatch(set_load(true));
@@ -30,46 +31,59 @@ export const toAuthorize = () => {
   };
 };
 
-export const getProfile = (userID) => {
+export const getProfile = (userID, handleLoad) => {
   return (dispatch) => {
+    // handleLoad(false);
     profileHTTP
       .get_profile(userID)
       .then(({ data }) => dispatch(set_profile(data)))
-      .catch((error) => {
-        dispatch(set_error(error.toString()));
-      });
+      .catch((e) => {
+        dispatch(set_error(e.name, '_', e.message));
+      })
+      .finally(() => {
+        // handleLoad(true)
+
+      })
   };
 };
 
 export const setProfile = (data, setErrors, setSubmitting) => {
+  // const formdata = new FormData();
+  // Object.entries(data).forEach(([key, value]) => {
+  //   formdata.append(key, value);
+  // })415 StatusCODE
   return (dispatch) => {
     profileHTTP
       .set_profile(data)
-      .then(({ data: { messages, resultCode } }) => {
+      .then(({ data: { messages, resultCode }, message }) => {
+        debugger
         if (resultCode === 0) {
           dispatch(set_profile(data))
-        } else {
-          throw new Error(messages);
+        } else {//server error 
+          throw new InvalidFieldsAPI(messages);//CustomERROR
         }
       })
-      .catch((e) => {//'error. (AboutMe), error. (FullName)'
-        
-        const errors = e.message.split(',').reduce((prev, item) => {//["error. (AboutMe)", "error. (FullName)"]
-            console.log(item)
+      .catch((e) => {
+        debugger
+        //maybe 403 or any error 
+        if (e instanceof InvalidFieldsAPI) {
+          const errors = e.message.split(',').reduce((prev, item) => {//["error. (AboutMe)", "error. (FullName)"]
             let key = item.match(/\((.+?)\)/)[1];
             let value = item.match(/.+?\./i)[0];
             prev[key[0].toLowerCase() + key.slice(1)] = value;
             return prev;
-        }, {} ); 
-        setErrors(errors);
+          }, {});
+          setErrors(errors);
+        } else {
+          dispatch(set_error(e.name + '_' + e.message));//ERROR COMPONENT and if(error) view, else view APP
+
+        }
       })
       .finally(() => {
         setSubmitting(false);
       })
   };
 };
-// Error: The FullName field is required. (FullName)
-
 
 export const getStatus = (userID) => {
   return (dispatch) => {

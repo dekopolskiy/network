@@ -18,6 +18,10 @@ export default class App extends React.Component {
     if (!this.props.isLoad) {
       return <Loading />;
     }
+    if(this.props.messageError) {
+      return <AnyError />
+    }
+
     return (
       <div className={styles.main__wrap}>{/*flex column 0 1 0 */}
         <Header />

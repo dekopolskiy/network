@@ -1,10 +1,10 @@
-export const IS_LOAD = "network/app/IS_LOAD";
+export const IS_LOAD = "network/loading/IS_LOAD";
 
 const initialState = {
   isLoad: false,
 };
 
-export const app_ = (state = initialState, { type, payload }) => {
+export const loading_ = (state = initialState, { type, payload }) => {
   switch (type) {
     case IS_LOAD:
       return { isLoad: payload };
