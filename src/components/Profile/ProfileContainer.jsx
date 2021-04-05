@@ -31,9 +31,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-const enhance =  compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withLoading,
-)
-
-export default enhance(ProfileContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer)

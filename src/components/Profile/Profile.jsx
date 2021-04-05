@@ -15,8 +15,11 @@ class Profile extends Component {
     };
   }
 
+  handleForm = () => {
+    this.setState({isEnable: !this.state.isEnable})
+  }
+
   componentDidMount() {
-    this.props.handleLoad(false);
     this.props.getProfile(this.props.userID);
   }
 

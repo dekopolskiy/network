@@ -4,7 +4,8 @@
     border-bottom: 2px solid rgb(233, 232, 232);
     flex-basis: 45px;
     display: flex;
-    background: #eb6d4a;
+    /* background: #eb6d4a; */
+    background: rgb(41, 40, 40);
     color:white;
 }
 
