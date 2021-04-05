@@ -7,6 +7,9 @@ const validate = (values) => {
     if (!values.email) {
         errors.email = 'Required field';
     }
+    if (!values.password) {
+        errors.password = 'Required field';
+    }
     return errors
 }
 export class Login extends Component {

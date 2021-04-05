@@ -7,9 +7,9 @@
 }
 
 .registration__form{
-    border-left: 1px solid rgb(187, 186, 186);
-    border-right: 1px solid rgb(187, 186, 186);
-    height: 50%;
+    border: 1px solid rgb(187, 186, 186);
+    padding: 40px 0;
+    height: 40%;
     flex-basis: 25%;
     display: flex;
     flex-direction: column;

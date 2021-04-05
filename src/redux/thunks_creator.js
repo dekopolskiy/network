@@ -23,7 +23,7 @@ export const toAuthorize = () => {
         }
       })
       .catch((e) => {
-        dispatch(set_error(e.name, '_', e.message));
+          dispatch(set_error(e.name, '_', e.message));
       })
       .finally(() => {
         dispatch(set_load(true));
@@ -56,7 +56,6 @@ export const setProfile = (data, setErrors, setSubmitting) => {
     profileHTTP
       .set_profile(data)
       .then(({ data: { messages, resultCode }, message }) => {
-        debugger
         if (resultCode === 0) {
           dispatch(set_profile(data))
         } else {//server error 
@@ -64,7 +63,6 @@ export const setProfile = (data, setErrors, setSubmitting) => {
         }
       })
       .catch((e) => {
-        debugger
         //maybe 403 or any error 
         if (e instanceof InvalidFieldsAPI) {
           const errors = e.message.split(',').reduce((prev, item) => {//["error. (AboutMe)", "error. (FullName)"]

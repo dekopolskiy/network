@@ -20,34 +20,35 @@ class InfoForm extends Component {
 
         return (
             <Formik initialValues={
-                { fullName, aboutMe, lookingForAJobDescription, ...contacts }}
+                { fullName, aboutMe, lookingForAJobDescription, contacts }}
                 valtionSchema={SignupSchema}
                 onSubmit={(values, { setErrors, setSubmitting }) => {
+                    handleForm();
                     setProfile(values, setErrors, setSubmitting);
                 }}
             >
-                {({ isSubmitting, setFieldValue }) => {
+                {({ isSubmitting, setFieldValue, values }) => {
                     return <Form className={styles.infoForm}>
                         <label className={styles.infoForm__item}><h3>fullname</h3>
-                            <Field type='text' name='fullName'/>
+                            <Field type='text' name='fullName' value={values.fullName || ''}/> {/*formik: PLEASE USE VALUE, avoid null*/}
                             <ErrorMessage name='fullName' component='div' className={styles.item__error} />
                         </label>
                         {/* FILE onChange={ (e) => { setFieldValue('photos.large', e.target.files[0]);*/}
                         <label className={styles.infoForm__item}><h3>about me</h3>
-                            <Field type='text' name='aboutMe'/>
+                            <Field type='text' name='aboutMe' value={values.aboutMe || ''}/>
                             <ErrorMessage name='aboutMe' component='div' className={styles.item__error}/>
                         </label>
                         <label className={styles.infoForm__item}><h3>looking for a job description</h3>
-                            <Field type='textarea' name='lookingForAJobDescription'/>
+                            <Field type='textarea' name='lookingForAJobDescription' value={values.lookingForAJobDescription || ''}/>
                             <ErrorMessage name='lookingForAJobDescription' component='div' className={styles.item__error}/>
                         </label>
                         {Object.keys(contacts).map((i) => {
-                            return <>
-                                <label className={styles.infoForm__item}>
-                                    <h3>{i}</h3><Field type='text' name={i} />
-                                    <ErrorMessage name={i} component='div' className={styles.item__error}/>
+                            return <label className={styles.infoForm__item} key={i} >
+                                    <h3>{i}</h3>
+                                    <Field type='text' name={`contacts.${i}`} value={values.contacts[i] || ''}/>
+                                    <ErrorMessage name={i} component='div' className={styles.item__error} />
                                 </label>
-                            </>
+                            
                         })
                         }
                         <div className={styles.controlPanelButtons}>

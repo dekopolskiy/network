@@ -26,7 +26,10 @@ const initialState = {
 export const profile_ = (state = initialState, { type, payload }) => {
   switch (type) {
     case SET_PROFILE:
-      return { ...state, ...payload };
+      return { 
+        ...state,
+        ...payload,  
+      };
     case SET_AVATAR:
       return {
         ...state,
