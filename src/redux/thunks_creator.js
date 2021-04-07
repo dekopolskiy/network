@@ -48,7 +48,7 @@ export const getProfile = (userID, handleLoad) => {
   };
 };
 
-export const setProfile = (data, setErrors, setSubmitting) => {
+export const setProfile = (data, { setErrors, setSubmitting, handleForm }) => {
   // const formdata = new FormData();
   // Object.entries(data).forEach(([key, value]) => {
   //   formdata.append(key, value);
@@ -56,27 +56,26 @@ export const setProfile = (data, setErrors, setSubmitting) => {
   return (dispatch) => {
     profileHTTP
       .set_profile(data)
-      .then(({ data: { messages, resultCode }, message }) => {
+      .then(({ data: { messages, resultCode } }) => {
         if (resultCode === 0) {
-          dispatch(set_profile(data))
+          dispatch(set_profile(data));
+          handleForm();
         } else {//server error 
           throw new InvalidFieldsAPI(messages);//CustomERROR
         }
       })
       .catch((e) => {
         //maybe 403 or any error 
-        if (e instanceof InvalidFieldsAPI) {
-        //   //Email field is reqiured (Email), {}
-        //   //Facebook field is reqiured (Contacts=>Facebook),
+        if (e instanceof InvalidFieldsAPI) { //Facebook field is reqiured (Contacts=>Facebook), etc
           let errors = {};
           e.message.split(',').forEach(( item ) => {//["error (AboutMe)", "error (Contacts=>facebook)"]
             let key = item.match(/\((.+?)\)/)[1];                       
             let value = item.match(/(.+?)\(/)[1]; //'Contacts->Youtube' or fullName
-            key = key.split('->').map((i) => i[0].toLowerCase() + i.slice(1)).join('.');
+            key = key.split('->').map((i) => i[0].toLowerCase() + i.slice(1)).join('.');//Youtube=>youtube
             errors = { 
-              ...errors,
-              ...setIn(errors, key, value),
-            }
+              ...setIn(errors, key, value),//setIn return new object, dont change main object
+            }//setIn transform one.two IN one:{two}, so setErrors() does not handle correctly one.two,
+            //but correctly handle simple object setErrors{ {one: {two: three }}}
           })
           setErrors(errors);
         } else {

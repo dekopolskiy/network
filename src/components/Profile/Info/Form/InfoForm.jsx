@@ -22,14 +22,14 @@ class InfoForm extends Component {
             <Formik initialValues={
                 { fullName, aboutMe, lookingForAJobDescription, contacts: {...contacts},}}
                 onSubmit={(values, { setErrors, setSubmitting }) => {
-                    setProfile(values, setErrors, setSubmitting);
+                    setProfile(values, { setErrors, setSubmitting, handleForm});
                 }}
+                validationSchema={SignupSchema}
             >
-                {({ isSubmitting, setFieldValue, values, errors }) => {
-                    console.log(errors)
+                {({ isSubmitting, values }) => {
                     return <Form className={styles.infoForm}>
                         <label className={styles.infoForm__item}><h3>fullname</h3>
-                            <Field type='text' name='fullName' value={values.fullName || null}/> {/*formik: PLEASE USE VALUE, avoid null*/}
+                            <Field type='text' name='fullName' value={values.fullName || ''}/> {/*formik: PLEASE USE VALUE, avoid null*/}
                             <ErrorMessage name='fullName' component='div' className={styles.item__error} />
                         </label>
                         {/* FILE onChange={ (e) => { setFieldValue('photos.large', e.target.files[0]);*/}
@@ -44,7 +44,7 @@ class InfoForm extends Component {
                         {Object.keys(contacts).map((i) => {
                             return <label className={styles.infoForm__item} key={i} >
                                     <h3>{i}</h3>
-                                    <Field type='text' name={"contacts." + i} value={values.contacts[i] || null}/>
+                                    <Field type='text' name={"contacts." + i} value={values.contacts[i] || ''}/>
                                     <ErrorMessage name={"contacts." + i} component='div' className={styles.item__error} />
                                 </label>
                             

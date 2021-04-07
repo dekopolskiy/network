@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
-import   Profile   from "./Profile";
+import Profile from "./Profile";
 import { getProfile, getStatus, setProfile } from "../../redux/thunks_creator";
 import { withLoading } from "../../hoc/withLoading";
 import { compose } from "redux";
@@ -11,7 +11,7 @@ class ProfileContainer extends Component {
     // if (this.props.message === 'AuthorizationError') { //WORK
     //   return <Redirect to="/login" />;
     // }
-    return <Profile {...this.props}/>;
+    return <Profile {...this.props} />;
   }
 }
 
@@ -27,7 +27,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getProfile: (userID, handleLoad) => dispatch(getProfile(userID, handleLoad)),
-    setProfile: (data, setErrors, setSubmitting) => dispatch(setProfile(data, setErrors, setSubmitting)),
+    setProfile: (values, { setErrors, setSubmitting, handleForm }) => dispatch(setProfile(values, { setErrors, setSubmitting, handleForm })),
   }
 };
 

@@ -12,7 +12,7 @@ export class Header extends Component {
           <div className={styles.logo}><h1>I F E</h1></div>
           <div className={styles.nav}>
             <NavLink to='/users'>Users</NavLink>
-            <NavLink to='/'>Contacts</NavLink>
+            <NavLink to='/'>Profile</NavLink>
             <NavLink to='/'>Search</NavLink>
             <NavLink to='/login'>Login</NavLink>
           </div>
