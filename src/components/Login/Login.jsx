@@ -29,7 +29,7 @@ export class Login extends Component {
                             }
                         });
                     }}>
-                    {({ isSubmitting }) => {
+                    {({ isSubmitting, errors }) => {
                         return <>
                             <Form className={styles.registration__form}>
                                 <div className={styles.form__title}>
@@ -38,12 +38,12 @@ export class Login extends Component {
                                 <div className={styles.form__userInfo}>
                                     <div className={styles.userInfo__item}>
                                         Login
-                                        <Field type='email' name='email' />
+                                        <Field type='email' name='email' className={styles.borderError} />
                                         <ErrorMessage name='email' component='div' className={styles.error} />
                                     </div>
                                     <div className={styles.userInfo__item}>
                                         Password
-                                        <Field type='password' name='password' />
+                                        <Field type='password' name='password' className={errors.password && styles.borderError}/>
                                         <ErrorMessage name='password' component='div' className={styles.error} />
                                     </div>
                                     <div className={styles.userInfo__item}>
