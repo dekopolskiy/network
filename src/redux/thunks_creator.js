@@ -1,3 +1,4 @@
+import { setIn } from "formik";
 import { InvalidFieldsAPI, AuthrorizationError } from "../customErrors/customErrors";
 import { auth_me, profileHTTP, statusHTTP, usersHTTP } from "../RestAPI/axios";
 import {
@@ -23,7 +24,8 @@ export const toAuthorize = () => {
         }
       })
       .catch((e) => {
-          dispatch(set_error(e.name, '_', e.message));
+        console.log(e)
+            dispatch(set_error(e.name + ':' + e.message));
       })
       .finally(() => {
         dispatch(set_load(true));
@@ -38,11 +40,10 @@ export const getProfile = (userID, handleLoad) => {
       .get_profile(userID)
       .then(({ data }) => dispatch(set_profile(data)))
       .catch((e) => {
-        dispatch(set_error(e.name, '_', e.message));
+        dispatch(set_error(e.name + ':' + e.message));
       })
       .finally(() => {
         // handleLoad(true)
-
       })
   };
 };
@@ -65,16 +66,18 @@ export const setProfile = (data, setErrors, setSubmitting) => {
       .catch((e) => {
         //maybe 403 or any error 
         if (e instanceof InvalidFieldsAPI) {
-          const errors = e.message.split(',').reduce((prev, item) => {//["error. (AboutMe)", "error. (FullName)"]
-            let key = item.match(/\((.+?)\)/)[1];
-            let value = item.match(/.+?\./i)[0];
-            prev[key[0].toLowerCase() + key.slice(1)] = value;
-            return prev;
-          }, {});
-          setErrors(errors);
+        //   //Email field is reqiured (Email), {}
+        //   //Facebook field is reqiured (Contacts=>Facebook),
+          const errors = {};
+          e.message.split(',').forEach(( item ) => {//["error (AboutMe)", "error (Contacts=>facebook)"]
+            let key = item.match(/\((.+?)\)/)[1];                       
+            let value = item.match(/(.+?)\(/)[1]; //'Contacts->Youtube' or fullName
+            key = key.split('->').map((i) => i[0].toLowerCase() + i.slice(1)).join('.');
+            setIn(errors, 'contacts.twitter', 'required');
+          })
+          setErrors({ ...errors });
         } else {
           dispatch(set_error(e.name + '_' + e.message));//ERROR COMPONENT and if(error) view, else view APP
-
         }
       })
       .finally(() => {

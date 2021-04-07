@@ -8,9 +8,9 @@ import { compose } from "redux";
 
 class ProfileContainer extends Component {
   render() {
-    if (this.props.message === 'AuthorizationError') { //WORK
-      return <Redirect to="/login" />;
-    }
+    // if (this.props.message === 'AuthorizationError') { //WORK
+    //   return <Redirect to="/login" />;
+    // }
     return <Profile {...this.props}/>;
   }
 }

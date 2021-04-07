@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router";
+import { NavLink } from "react-router-dom";
 import styles from "./AnyError.module.css";
 class AnyError extends Component {
   render() {
