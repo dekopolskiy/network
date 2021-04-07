@@ -68,14 +68,17 @@ export const setProfile = (data, setErrors, setSubmitting) => {
         if (e instanceof InvalidFieldsAPI) {
         //   //Email field is reqiured (Email), {}
         //   //Facebook field is reqiured (Contacts=>Facebook),
-          const errors = {};
+          let errors = {};
           e.message.split(',').forEach(( item ) => {//["error (AboutMe)", "error (Contacts=>facebook)"]
             let key = item.match(/\((.+?)\)/)[1];                       
             let value = item.match(/(.+?)\(/)[1]; //'Contacts->Youtube' or fullName
             key = key.split('->').map((i) => i[0].toLowerCase() + i.slice(1)).join('.');
-            setIn(errors, 'contacts.twitter', 'required');
+            errors = { 
+              ...errors,
+              ...setIn(errors, key, value),
+            }
           })
-          setErrors({ ...errors });
+          setErrors(errors);
         } else {
           dispatch(set_error(e.name + '_' + e.message));//ERROR COMPONENT and if(error) view, else view APP
         }
