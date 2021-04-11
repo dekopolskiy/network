@@ -18,7 +18,7 @@ class Profile extends Component {
   }
 
   handleForm = () => {
-    this.setState({isForm: !this.state.isForm})
+    this.setState({ isForm: !this.state.isForm })
   }
 
   componentDidMount() {
@@ -27,7 +27,7 @@ class Profile extends Component {
 
   componentDidUpdate( prevProp, prevState ) {
     if(prevProp.profile !== this.props.profile) {
-      this.setState({loadPage: true})
+      this.setState({ loadPage: true })
     }
   }
  
@@ -37,7 +37,12 @@ class Profile extends Component {
     }
     const {
       profile: { photos, fullName, aboutMe,
-        lookingForAJobDescription, contacts, }, status, setProfile } = this.props;
+        lookingForAJobDescription, contacts, userId}, status, setProfile } = this.props;
+
+    if( userId !== this.props.userID ) { 
+      return null 
+    } //other User don`t render
+    
     return (
       <div className={styles.container}>
         <div className={styles.profile}>

@@ -75,7 +75,7 @@ class Users extends Component {
                     flags.isChangeView ? styles.new_width : null
                   )}
                 >
-                  <NavLink to={"/profile/" + i.id}>
+                  <NavLink to={"/users/" + i.id}>
                     <div>
                       <img
                         src={i.photos.large ? i.photos.large : logo}

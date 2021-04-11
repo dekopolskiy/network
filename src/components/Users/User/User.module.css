@@ -1,0 +1,19 @@
+.user{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user img {
+
+}
+
+.image{
+}
+
+.follow{
+    border: 1px solid black;
+    width: 70%;
+}

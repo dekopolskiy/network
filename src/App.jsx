@@ -8,6 +8,7 @@ import { Loading } from './components/Loading/Loading';
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import LoginContainer from "./components/Login/LoginContainer";
+import User from "./components/Users/User/User"
 
 export default class App extends React.Component {
   componentDidMount() {
@@ -28,6 +29,7 @@ export default class App extends React.Component {
           <Route exact path="/" component={ProfileContainer} />
           <Route path="/login" component={LoginContainer} />
           <Route exact path="/users" component={UsersContainer} />
+          <Route path="/users/:id" component={User} />
           </Switch>
         </div>
         <Footer />
