@@ -8,16 +8,16 @@ import { compose } from "redux";
 
 class ProfileContainer extends Component {
   render() {
-    // if (this.props.message === 'AuthorizationError') { //WORK
-    //   return <Redirect to="/login" />;
-    // }
+    if (!this.props.authorize) { 
+      return <Redirect to="/login" />;
+    }
     return <Profile {...this.props} />;
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    message: state.error_.message,
+    authorize: state.current_user_.authorize,
     userID: state.current_user_.current_user.id,
     profile: state.profile_,
     status: state.status_.status,
@@ -27,7 +27,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getProfile: (userID, handleLoad) => dispatch(getProfile(userID, handleLoad)),
-    setProfile: (values, { setErrors, setSubmitting, handleForm }) => dispatch(setProfile(values, { setErrors, setSubmitting, handleForm })),
+    setProfile: (values, { setErrors, setSubmitting }) => dispatch(setProfile(values, { setErrors, setSubmitting })),
   }
 };
 

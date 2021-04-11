@@ -6,6 +6,7 @@ import classnames from "classnames";
 import SwitchView from "./SwitchView/SwitchView";
 import Sort from "./Sort/Sort";
 import Search from "./Search/Search";
+import { NavLink, Redirect } from "react-router-dom";
 
 class Users extends Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class Users extends Component {
       <div className={styles.container}>
         <div className={styles.сontrolPanel}>
           <div className={styles.controlPanel__leftside}>
-            <SwitchView handleViewChange={this.handleViewChange} flags={flags}/>
+            <SwitchView handleViewChange={this.handleViewChange} flags={flags} />
             <Sort sortUsers={this.sortUsers} />
           </div>
           <div className={styles.controlPanel__rightside}>
@@ -74,17 +75,19 @@ class Users extends Component {
                     flags.isChangeView ? styles.new_width : null
                   )}
                 >
-                  <div>
-                    <img
-                      src={i.photos.large ? i.photos.large : logo}
-                      width="200"
-                      alt="empty"
-                    />
-                  </div>
-                  <h3>{i.name}</h3>
+                  <NavLink to={"/profile/" + i.id}>
+                    <div>
+                      <img
+                        src={i.photos.large ? i.photos.large : logo}
+                        width="200"
+                        alt="empty"
+                      />
+                    </div>
+                    <h3>{i.name}</h3>
                   id:{i.id}
-                  {i.followed}
-                  <div>Status: {i.status ? i.status : "empty"}</div>
+                    {i.followed}
+                    <div>Status: {i.status ? i.status : "empty"}</div>
+                  </NavLink>
                 </div>
               );
             })}

@@ -6,24 +6,35 @@ import styles from "./Profile.module.css";
 import Status from "./Status.jsx/Status";
 import Posts from "./Posts/Posts";
 import Settings from "./Settings/Settings";
+import { Loading } from "../Loading/Loading";
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isEnable: false,
+      isForm: false,
+      loadPage: false,
     };
   }
 
   handleForm = () => {
-    this.setState({isEnable: !this.state.isEnable})
+    this.setState({isForm: !this.state.isForm})
   }
 
   componentDidMount() {
     this.props.getProfile(this.props.userID);
   }
 
+  componentDidUpdate( prevProp, prevState ) {
+    if(prevProp.profile !== this.props.profile) {
+      this.setState({loadPage: true})
+    }
+  }
+ 
   render() {
+    if(!this.state.loadPage) {
+      return <Loading/>
+    }
     const {
       profile: { photos, fullName, aboutMe,
         lookingForAJobDescription, contacts, }, status, setProfile } = this.props;
@@ -37,7 +48,7 @@ class Profile extends Component {
             <Info fullName={fullName} aboutMe={aboutMe} lookingForAJobDescription={lookingForAJobDescription}
               contacts={contacts} handleForm={this.handleForm} />
           </div>
-          {this.state.isEnable ?
+          {this.state.isForm ?
             <InfoForm {...this.props.profile} handleForm={this.handleForm} setProfile={setProfile} />
             :
             <Posts />

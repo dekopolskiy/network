@@ -1,6 +1,6 @@
 import { setIn } from "formik";
 import { InvalidFieldsAPI, AuthrorizationError } from "../customErrors/customErrors";
-import { auth_me, profileHTTP, statusHTTP, usersHTTP } from "../RestAPI/axios";
+import { auth_me, profileHTTP, registrationHTTP, statusHTTP, usersHTTP } from "../RestAPI/axios";
 import {
   set_error,
   set_load,
@@ -10,6 +10,7 @@ import {
   set_users,
   set_page_info,
   set_avatar,
+  set_authorize,
 } from "./actions_creator";
 
 export const toAuthorize = () => {
@@ -18,14 +19,14 @@ export const toAuthorize = () => {
     auth_me //maybe general error example: NETWORK, FORBIDDEN, SERVER
       .then(({ data: { data, resultCode, messages } }) => {
         if (resultCode === 0) {
-          dispatch(set_user(data));
+          dispatch(set_user({ ...data }));
+          dispatch(set_authorize({authorize: true }));
         } else { //maybe error from api, but status 200: 
-          throw new AuthrorizationError(messages.join(" "));
+        throw new AuthrorizationError(messages.join(" "));
         }
       })
       .catch((e) => {
-        console.log(e)
-            dispatch(set_error(e.name + ':' + e.message));
+        dispatch(set_error(e.name + ':' + e.message));
       })
       .finally(() => {
         dispatch(set_load(true));
@@ -48,7 +49,7 @@ export const getProfile = (userID, handleLoad) => {
   };
 };
 
-export const setProfile = (data, { setErrors, setSubmitting, handleForm }) => {
+export const setProfile = (data, { setErrors, setSubmitting }) => {
   // const formdata = new FormData();
   // Object.entries(data).forEach(([key, value]) => {
   //   formdata.append(key, value);
@@ -59,20 +60,19 @@ export const setProfile = (data, { setErrors, setSubmitting, handleForm }) => {
       .then(({ data: { messages, resultCode } }) => {
         if (resultCode === 0) {
           dispatch(set_profile(data));
-          handleForm();
-        } else {//server error 
+          return;
+        } 
           throw new InvalidFieldsAPI(messages);//CustomERROR
-        }
       })
       .catch((e) => {
         //maybe 403 or any error 
         if (e instanceof InvalidFieldsAPI) { //Facebook field is reqiured (Contacts=>Facebook), etc
           let errors = {};
-          e.message.split(',').forEach(( item ) => {//["error (AboutMe)", "error (Contacts=>facebook)"]
-            let key = item.match(/\((.+?)\)/)[1];                       
+          e.message.split(',').forEach((item) => {//["error (AboutMe)", "error (Contacts=>facebook)"]
+            let key = item.match(/\((.+?)\)/)[1];
             let value = item.match(/(.+?)\(/)[1]; //'Contacts->Youtube' or fullName
             key = key.split('->').map((i) => i[0].toLowerCase() + i.slice(1)).join('.');//Youtube=>youtube
-            errors = { 
+            errors = {
               ...setIn(errors, key, value),//setIn return new object, dont change main object
             }//setIn transform one.two IN one:{two}, so setErrors() does not handle correctly one.two,
             //but correctly handle simple object setErrors{ {one: {two: three }}}
@@ -117,5 +117,30 @@ export const setAvatar = (image) => {
       .then((response) => {
         dispatch(set_avatar({ ...response.data.data.photos }));
       })
+  }
+}
+
+export const sign_in = (props) => {
+  return (dispatch) => {
+    registrationHTTP
+      .sign_in(props)
+      .then(({ data: { resultCode, messages, data : { userId : id } } }) => {
+        if(resultCode === 0) {
+          dispatch(set_user({...props, id }));
+          dispatch(set_authorize({authorize: true}));
+        }
+      })
+  }
+}
+
+export const logout = () => {
+  return (dispatch) => {
+    registrationHTTP
+    .logout().then( ({ data: { resultCode }}) => {
+        if(resultCode === 0 ) {
+          dispatch(set_user({ email: null, id: null, login: null }))
+          dispatch(set_authorize({authorize: false}));
+        }
+    })
   }
 }

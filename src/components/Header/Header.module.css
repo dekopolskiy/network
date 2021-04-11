@@ -27,6 +27,12 @@
 .nav a{
     text-decoration: none;
     color:white;
-    font-size: 13px;
-    font-weight: 900;
+    cursor: pointer;
+}
+
+.sign_in{
+    border-bottom: 1px solid rgb(163, 163, 8);
+}
+.logout{
+    border-bottom: 1px solid rgb(131, 7, 13);
 }

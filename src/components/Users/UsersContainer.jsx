@@ -3,10 +3,13 @@ import { connect } from "react-redux";
 import Users from "./Users";
 import { Loading } from "../Loading/Loading"
 import { getUsers } from "../../redux/thunks_creator";
+import { compose } from "redux";
+import { withRouter } from "react-router";
 
 class UsersContainer extends Component {
   componentDidMount() {
     this.props.getUsers({});
+    console.log(this.props.match.params.id);
   }
   render() {
     if (!this.props.users.length) {

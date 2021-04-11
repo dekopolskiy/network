@@ -1,0 +1,12 @@
+.loading{
+    font-size: 2em;
+    margin: auto;
+    font-weight: 100;
+    box-sizing: border-box;
+    width: 100px;
+}
+
+.line{
+    border-right: 1px solid silver;
+}
+

@@ -15,14 +15,20 @@ const SignupSchema = Yup.object().shape({
 
 class InfoForm extends Component {
 
+    componentDidUpdate(prevProp, prevState) {
+        if(prevProp !== this.props) {
+            this.props.handleForm();
+        }
+    }
+
     render() {
         const { fullName, aboutMe,
-            lookingForAJobDescription, contacts, setProfile, handleForm } = this.props;
+            lookingForAJobDescription, contacts, setProfile } = this.props;
         return (
             <Formik initialValues={
                 { fullName, aboutMe, lookingForAJobDescription, contacts: {...contacts},}}
                 onSubmit={(values, { setErrors, setSubmitting }) => {
-                    setProfile(values, { setErrors, setSubmitting, handleForm});
+                    setProfile(values, { setErrors, setSubmitting});
                 }}
                 validationSchema={SignupSchema}
             >
@@ -58,7 +64,6 @@ class InfoForm extends Component {
                                 Edit profile
                         </Button>
                             <Button
-                                onClick={handleForm} 
                                 color='#446699'
                                 type='button'
                                 wh='80'>

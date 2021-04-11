@@ -1,4 +1,4 @@
-import { SET_USER } from "./reducers/current_user_";
+import { SET_AUTHORIZE, SET_USER } from "./reducers/current_user_";
 import { IS_LOAD } from "./reducers/loading_";
 import { SET_ERROR } from "./reducers/error_"
 import { SET_PROFILE, SET_AVATAR } from "./reducers/profile_";
@@ -41,7 +41,12 @@ export const set_page_info = (payload) => ({
   payload
 })
 
-export const set_avatar = ( payload ) => ({
+export const set_avatar = (payload) => ({
   type: SET_AVATAR,
+  payload
+})
+
+export const set_authorize = (payload) => ({
+  type: SET_AUTHORIZE,
   payload
 })

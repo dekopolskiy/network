@@ -73,7 +73,9 @@
     box-sizing: border-box;
     padding: 25px;
 }
-
+.listUsers__user a{
+    text-decoration: none;
+}
 .new_width {
     flex-basis: 25%;
     transition: 0.5s flex-basis ease;    

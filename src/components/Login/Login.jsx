@@ -2,7 +2,6 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { Component } from 'react';
 import styles from "./Login.module.css";
 import Button from "../../css/Button/Button";
-import { registration } from '../../RestAPI/axios';
 const validate = (values) => {
     const errors = {};
     if (!values.email) {
@@ -13,21 +12,17 @@ const validate = (values) => {
     }
     return errors
 }
+
 export class Login extends Component {
     render() {
+        const { sign_in, userID } = this.props;
         return (
             <div className={styles.registration}>
                 <Formik
                     initialValues={{ email: '', password: '' }}
-                    validate={validate}
-                    onSubmit={(e, {setErrors}) => {
-                        registration.sign_in(e).then((data) => {
-                            if(data.data.resultCode === 1) {
-                                const errors = {};
-                                errors.email = String(data.data.messages);
-                                setErrors(errors);
-                            }
-                        });
+                    validate={ validate }
+                    onSubmit={( e, { setErrors,  }) => {
+                        sign_in(e);
                     }}>
                     {({ isSubmitting, errors }) => {
                         return <>

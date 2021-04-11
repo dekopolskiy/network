@@ -5,7 +5,6 @@ import { toAuthorize } from "./redux/thunks_creator";
 const mapStateToProps = (state) => {
   return {
     isLoad: state.loading_.isLoad,
-    messageError: state.error_.message
   };
 };
 
