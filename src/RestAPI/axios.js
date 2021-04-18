@@ -4,11 +4,12 @@ const baseURL = "https://social-network.samuraijs.com/api/1.0/";
 const instance = axios.create({
   withCredentials: true,
   headers: {
-    "Api-Key": "3291f849-da91-4ce9-9921-6650bf28d2d0",
+    "Api-Key": "e811390c-3dfa-4cdc-b8f9-fba476829b23",
   },
 });
 
 
+<<<<<<< HEAD
 export const httpReq = {
   auth_me : instance(`${baseURL}auth/me`),
 
@@ -41,3 +42,9 @@ export const httpReq = {
     get_captcha_url: () => instance(`${baseURL}security/get-captcha-url`),
   },
 }
+=======
+export const followHTTP = {
+  follow: (userId) => instance(`${baseURL}follow/${userId}`),
+  unfollow: (userId) => instance.delete(`${baseURL}follow/${userId}`),
+}
+>>>>>>> d9e2972d7907ded1cdbfa5477cb8dd48a49bbd65

@@ -8,7 +8,11 @@ import { Loading } from './components/Loading/Loading';
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import LoginContainer from "./components/Login/LoginContainer";
+<<<<<<< HEAD
 import User from "./components/Users/User/User";
+=======
+import User from "./components/Users/User/User"
+>>>>>>> d9e2972d7907ded1cdbfa5477cb8dd48a49bbd65
 
 export default class App extends React.Component {
   componentDidMount() {

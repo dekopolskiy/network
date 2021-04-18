@@ -25,8 +25,13 @@ class Profile extends Component {
     this.props.getProfile(this.props.userID);
   }
 
+<<<<<<< HEAD
   componentDidUpdate(prevProp, prevState) {
     if (prevProp.profile !== this.props.profile) {
+=======
+  componentDidUpdate( prevProp, prevState ) {
+    if(prevProp.profile !== this.props.profile) {
+>>>>>>> d9e2972d7907ded1cdbfa5477cb8dd48a49bbd65
       this.setState({ loadPage: true })
     }
   }
@@ -41,8 +46,18 @@ class Profile extends Component {
     }
     
     const {
+<<<<<<< HEAD
       profile: { photos: { large }, fullName, aboutMe,
         lookingForAJobDescription, contacts, }, status, setProfile } = this.props;
+=======
+      profile: { photos, fullName, aboutMe,
+        lookingForAJobDescription, contacts, userId}, status, setProfile } = this.props;
+
+    if( userId !== this.props.userID ) { 
+      return null 
+    } //other User don`t render
+    
+>>>>>>> d9e2972d7907ded1cdbfa5477cb8dd48a49bbd65
     return (
       <div className={styles.container}>
         <div className={styles.profile}>

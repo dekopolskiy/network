@@ -3,18 +3,24 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import Profile from "./Profile";
 import { getProfile, getStatus, setProfile } from "../../redux/thunks_creator";
+<<<<<<< HEAD
 import { withLoading } from "../../hoc/withLoading";
 import { compose } from "redux";
 import { reset_profile } from "../../redux/actions_creator";
+=======
+>>>>>>> d9e2972d7907ded1cdbfa5477cb8dd48a49bbd65
 
 class ProfileContainer extends Component {
+
   render() {
-    if (!this.props.authorize) { 
+    if (!this.props.authorize) {
       return <Redirect to="/login" />;
     }
+
     return <Profile {...this.props} />;
   }
 }
+
 
 const mapStateToProps = (state) => {
   return {
