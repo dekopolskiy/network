@@ -8,24 +8,36 @@ const instance = axios.create({
   },
 });
 
-export const auth_me = instance(`${baseURL}auth/me`);
-export const registrationHTTP = {
-  sign_in: ({email, password, rememberMe, captcha}) => instance.post(`${baseURL}auth/login`, { email, password, rememberMe, captcha }),
-  logout: () => instance.delete(`${baseURL}auth/login`),
-}
 
-export const profileHTTP = {
-  get_profile: (userID) => instance(`${baseURL}profile/${userID}`),
-  set_profile: (data) => instance.put(`${baseURL}profile`, data),
-}
+export const httpReq = {
+  auth_me : instance(`${baseURL}auth/me`),
 
-export const statusHTTP = {
-  get_status: (userID) => instance(`${baseURL}profile/status/${userID}`),
-  set_status: (status) => instance.put(`${baseURL}profile/status`, { status }),
-}
+  registration : {
+    sign_in: ({email, password, rememberMe, captcha}) => instance.post(`${baseURL}auth/login`, { email, password, rememberMe, captcha }),
+    logout: () => instance.delete(`${baseURL}auth/login`),
+  },
 
-export const usersHTTP = {
-  get_users: (page, count) => instance(`${baseURL}users?count=${count}&page=${page}`),
-  set_avatar: (image) => instance.put(`${baseURL}profile/photo`, image)
-}
+  profile : {
+    get_profile: (userID) => instance(`${baseURL}profile/${userID}`),
+    set_profile: (data) => instance.put(`${baseURL}profile`, data), 
+  },
 
+  status : {
+    get_status: (userID) => instance(`${baseURL}profile/status/${userID}`),
+    set_status: (status) => instance.put(`${baseURL}profile/status`, { status }),
+  },
+
+  users : {
+    get_users: (page, count) => instance(`${baseURL}users?count=${count}&page=${page}`),
+    set_avatar: (image) => instance.put(`${baseURL}profile/photo`, image)
+  },
+
+  subscribe : {
+    follow: (userId) => instance.post(`${baseURL}follow/${userId}`),
+    unfollow: (userId) => instance.delete(`${baseURL}follow/${userId}`),
+  },
+
+  captcha: {
+    get_captcha_url: () => instance(`${baseURL}security/get-captcha-url`),
+  },
+}

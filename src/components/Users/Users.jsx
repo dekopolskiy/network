@@ -6,7 +6,7 @@ import classnames from "classnames";
 import SwitchView from "./SwitchView/SwitchView";
 import Sort from "./Sort/Sort";
 import Search from "./Search/Search";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 class Users extends Component {
   constructor(props) {
@@ -50,6 +50,7 @@ class Users extends Component {
 
   render() {
     const { flags, users } = this.state;
+    const { ids: idsInProgress } = this.props.followUsers;
     return (
       <div className={styles.container}>
         <div className={styles.сontrolPanel}>
@@ -75,7 +76,7 @@ class Users extends Component {
                     flags.isChangeView ? styles.new_width : null
                   )}
                 >
-                  <NavLink to={"/profile/" + i.id}>
+                  <NavLink to={"/users/" + i.id}>
                     <div>
                       <img
                         src={i.photos.large ? i.photos.large : logo}
@@ -84,10 +85,21 @@ class Users extends Component {
                       />
                     </div>
                     <h3>{i.name}</h3>
-                  id:{i.id}
-                    {i.followed}
+                    id:{i.id}
                     <div>Status: {i.status ? i.status : "empty"}</div>
                   </NavLink>
+                  {i.followed ?
+                    <button className={styles.buttonUnfollow}
+                      disabled={idsInProgress.some((id) => id === i.id)}
+                      onClick={() => this.props.unfollow(i.id)}>
+                      unfollow
+                    </button> :
+                    <button className={styles.buttonFollow}
+                      disabled={idsInProgress.some((id) => id === i.id)}
+                      onClick={() => this.props.follow(i.id)}>
+                      follow
+                    </button>
+                  }
                 </div>
               );
             })}

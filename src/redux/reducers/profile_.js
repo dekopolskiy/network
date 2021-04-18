@@ -1,5 +1,6 @@
 export const SET_PROFILE = "network/profile/SET_PROFILE";
 export const SET_AVATAR = "network/profile/SET_AVATAR";
+export const RESET_PROFILE = "network/profile/RESET_PROFILE";
 
 const initialState = {
   aboutMe: "",
@@ -35,6 +36,8 @@ export const profile_ = (state = initialState, { type, payload }) => {
         ...state,
         photos: { ...payload }
       }
+    case RESET_PROFILE:
+      return initialState
     default:
       return state;
   }

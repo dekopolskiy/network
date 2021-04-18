@@ -12,13 +12,15 @@ class LoginContainer extends Component {
         return (
             <Login sign_in={this.props.sign_in}
                 userID={this.props.userID}
+                captcha={this.props.captcha}
             />
         )
     }
 }
 const mapStateToProps = (state) => {
     return {
-        authorize : state.current_user_.authorize
+        authorize : state.current_user_.authorize,
+        captcha: state.current_user_.captcha,
     }
 }
 const mapDispatchToProps = (dispatch) => {

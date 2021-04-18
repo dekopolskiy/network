@@ -22,6 +22,8 @@
     display: flex;
     justify-content: space-around;
     margin: auto 0;
+    font-size: 15px;
+
 }
 
 .nav a{
@@ -30,9 +32,13 @@
     cursor: pointer;
 }
 
+.nav a:hover{
+    border-bottom: 2px solid white;
+}
 .sign_in{
     border-bottom: 1px solid rgb(163, 163, 8);
 }
 .logout{
     border-bottom: 1px solid rgb(131, 7, 13);
+    cursor: pointer;
 }

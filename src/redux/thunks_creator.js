@@ -1,6 +1,7 @@
 import { setIn } from "formik";
-import { InvalidFieldsAPI, AuthrorizationError } from "../customErrors/customErrors";
-import { auth_me, profileHTTP, registrationHTTP, statusHTTP, usersHTTP } from "../RestAPI/axios";
+import { InvalidFieldsAPI, AuthrorizationError, InnocorrectEmailOrPasword } from "../customErrors/customErrors";
+import { handleProfile, handleStatus, handleSurbscribe } from "../helpers/helpers";
+import { httpReq } from "../RestAPI/axios";
 import {
   set_error,
   set_load,
@@ -11,19 +12,23 @@ import {
   set_page_info,
   set_avatar,
   set_authorize,
+  set_follow,
+  set_unfollow,
+  set_captcha
 } from "./actions_creator";
 
 export const toAuthorize = () => {
   return (dispatch) => {
     dispatch(set_load(false));
-    auth_me //maybe general error example: NETWORK, FORBIDDEN, SERVER
+    httpReq.auth_me //maybe general error example: NETWORK, FORBIDDEN, SERVER
       .then(({ data: { data, resultCode, messages } }) => {
         if (resultCode === 0) {
           dispatch(set_user({ ...data }));
-          dispatch(set_authorize({authorize: true }));
-        } else { //maybe error from api, but status 200: 
+          dispatch(set_authorize({ authorize: true }));
+          dispatch(set_error(''))
+          return;
+        } //maybe error from api, but status 200: 
         throw new AuthrorizationError(messages.join(" "));
-        }
       })
       .catch((e) => {
         dispatch(set_error(e.name + ':' + e.message));
@@ -37,7 +42,7 @@ export const toAuthorize = () => {
 export const getProfile = (userID, handleLoad) => {
   return (dispatch) => {
     // handleLoad(false);
-    profileHTTP
+    httpReq.profile
       .get_profile(userID)
       .then(({ data }) => dispatch(set_profile(data)))
       .catch((e) => {
@@ -55,14 +60,14 @@ export const setProfile = (data, { setErrors, setSubmitting }) => {
   //   formdata.append(key, value);
   // })415 StatusCODE
   return (dispatch) => {
-    profileHTTP
+    httpReq.profile
       .set_profile(data)
       .then(({ data: { messages, resultCode } }) => {
         if (resultCode === 0) {
           dispatch(set_profile(data));
           return;
-        } 
-          throw new InvalidFieldsAPI(messages);//CustomERROR
+        }
+        throw new InvalidFieldsAPI(messages);//CustomERROR
       })
       .catch((e) => {
         //maybe 403 or any error 
@@ -88,59 +93,93 @@ export const setProfile = (data, { setErrors, setSubmitting }) => {
   };
 };
 
-export const getStatus = (userID) => {
-  return (dispatch) => {
-    statusHTTP
-      .get_status(userID)
-      .then(({ data }) => dispatch(set_status(data)));
-  };
-};
-
-export const setStatus = (status) => {
-  return (dispatch) => {
-    statusHTTP.set_status(status).then(() => dispatch(set_status(status)));
-  };
-};
-
 export const getUsers = ({ page = 1, usersOnPage = 20 }) => {
   return (dispatch) => {
-    usersHTTP.get_users(page, usersOnPage).then(({ data }) => {
-      dispatch(set_users({ data }));
-      dispatch(set_page_info({ page, usersOnPage }))
-    });
+    httpReq.users
+      .get_users(page, usersOnPage).then(({ data }) => {
+        dispatch(set_users({ data }));
+        dispatch(set_page_info({ page, usersOnPage }))
+        dispatch(set_error(''))
+      });
   };
 };
 
 export const setAvatar = (image) => {
   return (dispatch) => {
-    usersHTTP.set_avatar(image)
+    httpReq.users
+      .set_avatar(image)
       .then((response) => {
         dispatch(set_avatar({ ...response.data.data.photos }));
+        dispatch(set_error(''))
       })
   }
 }
 
 export const sign_in = (props) => {
+  const { email, password, captcha, rememberMe, setErrors, setSubmitting } = props;
   return (dispatch) => {
-    registrationHTTP
-      .sign_in(props)
-      .then(({ data: { resultCode, messages, data : { userId : id } } }) => {
-        if(resultCode === 0) {
-          dispatch(set_user({...props, id }));
-          dispatch(set_authorize({authorize: true}));
+    httpReq.registration
+      .sign_in({ email, password, captcha, rememberMe })
+      .then(({ data: { resultCode, messages, data: { userId: id } } }) => {
+        if (resultCode === 0) {
+          dispatch(set_user({ ...props, id }));
+          dispatch(set_authorize({ authorize: true }));
+          dispatch(set_captcha(''));
+          dispatch(set_error(''));
+          return;
         }
+        if (resultCode === 10) {
+          httpReq.captcha
+            .get_captcha_url()
+            .then(({ data: { url } }) => dispatch(set_captcha(url)))
+        }
+        throw new InnocorrectEmailOrPasword(messages);
+
       })
+      .catch((e) => {
+        if (e instanceof InnocorrectEmailOrPasword) {
+          setErrors({ email: e.message })
+          return
+        }
+        dispatch(set_error(e.name + ':' + e.message));
+      })
+      .finally(() => setSubmitting(false))
   }
 }
 
 export const logout = () => {
   return (dispatch) => {
-    registrationHTTP
-    .logout().then( ({ data: { resultCode }}) => {
-        if(resultCode === 0 ) {
+    httpReq.registration
+      .logout()
+      .then(({ data: { resultCode } }) => {
+        if (resultCode === 0) {
           dispatch(set_user({ email: null, id: null, login: null }))
-          dispatch(set_authorize({authorize: false}));
+          dispatch(set_authorize({ authorize: false }));
         }
-    })
+      })
   }
 }
+
+export const follow = (id) => {
+  return (dispatch) => {
+    handleSurbscribe({ dispatch, id, follow: true, set_follow });
+  }
+}
+
+export const unfollow = (id) => {
+  return (dispatch) => {
+    handleSurbscribe({ dispatch, id, set_unfollow });
+  }
+}
+
+export const getStatus = (userID) => {
+  return (dispatch) => {
+    handleStatus({ statusGet: true, userID, dispatch, set_status, set_error });
+  };
+};
+
+export const setStatus = (status) => {
+  return (dispatch) => {
+    handleStatus({ status, dispatch, set_status, set_error });
+  };
+};

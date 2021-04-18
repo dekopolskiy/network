@@ -75,9 +75,34 @@
 }
 .listUsers__user a{
     text-decoration: none;
+    color: black;
 }
 .new_width {
     flex-basis: 25%;
     transition: 0.5s flex-basis ease;    
+}
+
+.buttonFollow{
+    padding: 7px;
+    background: rgb(18, 116, 18);
+    color:white;
+    border:none;
+}
+
+.buttonUnfollow{
+    padding: 7px;
+    background: rgb(233, 119, 99);
+    color: white;
+    border: none;
+}
+.buttonUnfollow:disabled{
+    background: rgb(177, 175, 175);
+    color: grey;
+    border: none;
+}
+.buttonFollow:disabled{
+    background: rgb(177, 175, 175);
+    color: grey;
+    border: none;
 }
 

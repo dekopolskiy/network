@@ -1,5 +1,6 @@
 export const SET_USER = "network/users/SET_USER";
 export const SET_AUTHORIZE = "network/users/SET_AUTHORIZE";
+export const SET_CAPTCHA = "network/users/SET_CAPTCHA";
 
 const initialState = {
   current_user: {
@@ -8,6 +9,7 @@ const initialState = {
     id: null,
   },
   authorize: false,
+  captcha: '',
 };
 
 export const current_user_ = (state = initialState, { type, payload }) => {
@@ -20,6 +22,11 @@ export const current_user_ = (state = initialState, { type, payload }) => {
         return {
           ...state,
           authorize: payload.authorize,
+        }
+      case SET_CAPTCHA: 
+        return {
+          ...state,
+          captcha: payload
         }
     default:
       return state;

@@ -18,45 +18,56 @@ class Profile extends Component {
   }
 
   handleForm = () => {
-    this.setState({isForm: !this.state.isForm})
+    this.setState({ isForm: !this.state.isForm })
   }
 
   componentDidMount() {
     this.props.getProfile(this.props.userID);
   }
 
-  componentDidUpdate( prevProp, prevState ) {
-    if(prevProp.profile !== this.props.profile) {
-      this.setState({loadPage: true})
+  componentDidUpdate(prevProp, prevState) {
+    if (prevProp.profile !== this.props.profile) {
+      this.setState({ loadPage: true })
     }
   }
- 
+
+  componentWillUnmount() {
+    this.props.reset_profile()
+  }
+
   render() {
-    if(!this.state.loadPage) {
-      return <Loading/>
+    if (!this.state.loadPage) {
+      return <Loading />
     }
+    
     const {
-      profile: { photos, fullName, aboutMe,
+      profile: { photos: { large }, fullName, aboutMe,
         lookingForAJobDescription, contacts, }, status, setProfile } = this.props;
     return (
       <div className={styles.container}>
         <div className={styles.profile}>
           <div className={styles.profile__info}>
-            {/* <Status userID={this.props.userID}/> */}
-            <Avatar photo={photos.large} />
+            <Status status={status} userID={this.props.userID}/>
+            <Avatar photo={large} />
             <Settings handleForm={this.handleForm} />
             <Info fullName={fullName} aboutMe={aboutMe} lookingForAJobDescription={lookingForAJobDescription}
               contacts={contacts} handleForm={this.handleForm} />
           </div>
           {this.state.isForm ?
-            <InfoForm {...this.props.profile} handleForm={this.handleForm} setProfile={setProfile} />
+            <InfoForm {...this.props.profile} 
+            handleForm={this.handleForm} 
+            setProfile={setProfile} />
             :
             <Posts />
           }
-          <div className={styles.profile__category}>Category</div>
+          <div className={styles.profile__category}>
+            <h2>Category</h2>
+          </div>
         </div>
       </div>
     );
   }
 }
 export default Profile;
+
+

@@ -5,6 +5,7 @@ import Profile from "./Profile";
 import { getProfile, getStatus, setProfile } from "../../redux/thunks_creator";
 import { withLoading } from "../../hoc/withLoading";
 import { compose } from "redux";
+import { reset_profile } from "../../redux/actions_creator";
 
 class ProfileContainer extends Component {
   render() {
@@ -26,6 +27,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    reset_profile: () => dispatch(reset_profile()),
     getProfile: (userID, handleLoad) => dispatch(getProfile(userID, handleLoad)),
     setProfile: (values, { setErrors, setSubmitting }) => dispatch(setProfile(values, { setErrors, setSubmitting })),
   }

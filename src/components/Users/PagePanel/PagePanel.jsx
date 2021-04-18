@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./PagePanel.module.css";
 import { useState, useEffect } from "react";
 
-const PagePanel = ({ pageInfo : { totalCount, usersOnPage, currentPage } , getUsers }) => {
+const PagePanel = ({ pageInfo : { totalCount, usersOnPage = 20, currentPage = 1 } , getUsers }) => {
   const [pages, setPages] = useState([]);
   const pagesLength = Math.ceil(totalCount / usersOnPage);
   const [step, setStep] = useState({ left: 0, right: 5 });

@@ -2,15 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Users from "./Users";
 import { Loading } from "../Loading/Loading"
-import { getUsers } from "../../redux/thunks_creator";
-import { compose } from "redux";
-import { withRouter } from "react-router";
+import { follow, getUsers, unfollow } from "../../redux/thunks_creator";
 
 class UsersContainer extends Component {
   componentDidMount() {
     this.props.getUsers({});
-    console.log(this.props.match.params.id);
   }
+
   render() {
     if (!this.props.users.length) {
       return <Loading/>;
@@ -22,11 +20,14 @@ class UsersContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     users: state.users_.users,
+    followUsers: state.users_.followUsers,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   getUsers: (page) => dispatch(getUsers(page)),
+  follow: (id) => dispatch(follow(id)),
+  unfollow: (id) => dispatch(unfollow(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);

@@ -13,3 +13,10 @@ export class AuthrorizationError extends Error {
         this.name = 'AuthorizationError';
     }
 }
+
+export class InnocorrectEmailOrPasword extends Error{
+    constructor(props) {
+        super(props);
+        this.name = 'InnocorrectEmailOrPassword';
+    }
+}
