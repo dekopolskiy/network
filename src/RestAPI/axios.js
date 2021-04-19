@@ -9,7 +9,6 @@ const instance = axios.create({
 });
 
 
-<<<<<<< HEAD
 export const httpReq = {
   auth_me : instance(`${baseURL}auth/me`),
 
@@ -42,9 +41,3 @@ export const httpReq = {
     get_captcha_url: () => instance(`${baseURL}security/get-captcha-url`),
   },
 }
-=======
-export const followHTTP = {
-  follow: (userId) => instance(`${baseURL}follow/${userId}`),
-  unfollow: (userId) => instance.delete(`${baseURL}follow/${userId}`),
-}
->>>>>>> d9e2972d7907ded1cdbfa5477cb8dd48a49bbd65

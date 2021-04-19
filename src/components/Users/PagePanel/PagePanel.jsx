@@ -1,36 +1,35 @@
 import React from "react";
 import styles from "./PagePanel.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
-const PagePanel = ({ pageInfo : { totalCount, usersOnPage = 20, currentPage = 1 } , getUsers }) => {
-  const [pages, setPages] = useState([]);
+const PagePanel = ({ pageInfo: { totalCount, usersOnPage = 20, currentPage = 1 }, getUsers }) => {
   const pagesLength = Math.ceil(totalCount / usersOnPage);
   const [step, setStep] = useState({ left: 0, right: 5 });
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(20);
 
-  useEffect(() => {
-    let allPages = [];
+  let allPages = useMemo(() => {
+    let all = [];
     for (let i = 1; i <= pagesLength; i++) {
-      allPages.push(i);
+      all.push(i);
     }
-    setPages(allPages);
+    return all
   }, [usersOnPage]);
 
   useEffect(() => {
-    if(currentPage === page ) {
+    if (currentPage === page) { //all http disabled
       return null;
     }
-      getUsers({page, perPage})
-  }, [page]);
+    getUsers({ page, perPage })
+  }, [page]);//next page
 
-  
+
   useEffect(() => {
-    if(perPage === usersOnPage) {
+    if (perPage === usersOnPage) { //all http disabled
       return null;
     }
-    getUsers({page, perPage});
-  }, [perPage])
+    getUsers({ page, perPage });
+  }, [perPage]) //set users on Page
 
   const pagesMove = (stepValue) => {
     if (stepValue == -5 && step.left == 0) {
@@ -43,33 +42,33 @@ const PagePanel = ({ pageInfo : { totalCount, usersOnPage = 20, currentPage = 1 
   };
 
   const handleSelect = (e) => {
-      e.persist();
-      setPerPage(e.target.value)
+    e.persist();
+    setPerPage(e.target.value)
   }
 
   const changePage = (pageValue) => {
-    if(pageValue === page) return null;
+    if (pageValue === page) return null;
     setPage(pageValue);
   }
-  
+
   return (
     <div className={styles.pagePanel}>
-      <div onClick={ () => changePage(1) }>First</div>
-      <div className={styles.left} onClick={ () => pagesMove(-5) }>
+      <div onClick={() => changePage(1)}>First</div>
+      <div className={styles.left} onClick={() => pagesMove(-5)}>
         Prev
       </div>
-      {pages
-      .slice(step.left, step.right)
-      .map((i) => (
-        <div key={i}
-        className={currentPage === i? styles.current: null } 
-        onClick={ () => setPage(i) }>{i}</div>
-      ))}
-      <div className={styles.right} onClick={ () => pagesMove(5) }>
+      {allPages
+        .slice(step.left, step.right)
+        .map((i) => (
+          <div key={i}
+            className={currentPage === i ? styles.current : null}
+            onClick={() => setPage(i)}>{i}</div>
+        ))}
+      <div className={styles.right} onClick={() => pagesMove(5)}>
         Next
       </div>
-      <div onClick={ () => changePage(pagesLength) }>Last</div>
-      <div className={styles.select}> 
+      <div onClick={() => changePage(pagesLength)}>Last</div>
+      <div className={styles.select}>
         <select name="" id="" onChange={handleSelect}>
           <option value="20">20</option>
           <option value="50">50</option>

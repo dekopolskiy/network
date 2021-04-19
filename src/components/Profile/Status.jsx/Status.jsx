@@ -1,64 +1,52 @@
-import React, { Component } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { getStatus, setStatus } from '../../../redux/thunks_creator'
 import styles from "./Status.module.css"
 
-class Status extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            isEdit: false,
-            status: this.props.status,
-        }
-    }
-    componentDidMount() {
-        this.props.getStatus(this.props.userID);
-    }
-    componentDidUpdate(prevPR, prevST) {
-        if (prevPR !== this.props) {
-            this.setState({ status: this.props.status })
-        }
-    }
-    handleChange = (e) => {
+const Status = (props) => {
+    const [isEdit, setIsEdit] = useState(false);
+    const [status, setStatus] = useState(props.status);
+
+    useEffect(() => {
+        props.getStatus(props.userID);
+    }, [])
+
+    const handleChange = (e) => {
         e.persist();
-        this.setState((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-        }))
+        setStatus(e.target.value)
     }
 
-    enableToEdit = () => {
-        this.setState({ isEdit: true });
+    const enableToEdit = () => {
+        setIsEdit(true);
     }
 
-    handleBlur = () => {
-        this.setState({ isEdit: false });
-        this.props.setStatus(this.state.status)
+    const handleBlur = () => {
+        setIsEdit(false);
+        props.setStatus(status)
     }
 
-    render() {
         return (
             <>
-                {this.state.isEdit ?
+                {isEdit ?
                     <input
                         className={styles.status_input}
                         autoFocus={true}
                         name='status'
-                        onChange={this.handleChange}
-                        value={this.state.status}
-                        onBlur={this.handleBlur}
+                        onChange={handleChange}
+                        value={status}
+                        onBlur={handleBlur}
                     />
                     :
                     <div
                         className={styles.status}
-                        onClick={this.enableToEdit}
-                    >{this.props.status}
+                        onClick={enableToEdit}
+                    >{props.status}
                     </div>
                 }
             </>
         )
-    }
 }
+
 const mapDispatchToProps = (dispatch) => {
     return {
         getStatus: (userID) => dispatch(getStatus(userID)), 
