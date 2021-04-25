@@ -72,6 +72,7 @@
     flex-basis: 50%;
     box-sizing: border-box;
     padding: 25px;
+    text-align: center;
 }
 .listUsers__user a{
     text-decoration: none;

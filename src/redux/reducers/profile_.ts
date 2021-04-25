@@ -2,6 +2,7 @@ export const SET_PROFILE = "network/profile/SET_PROFILE";
 export const SET_AVATAR = "network/profile/SET_AVATAR";
 export const RESET_PROFILE = "network/profile/RESET_PROFILE";
 
+
 const initialState = {
   aboutMe: "",
   contacts: {

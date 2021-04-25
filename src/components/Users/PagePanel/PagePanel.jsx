@@ -13,7 +13,7 @@ const PagePanel = ({ pageInfo: { totalCount, usersOnPage = 20, currentPage = 1 }
     for (let i = 1; i <= pagesLength; i++) {
       all.push(i);
     }
-    return all
+    return all;
   }, [usersOnPage]);
 
   useEffect(() => {
@@ -32,6 +32,7 @@ const PagePanel = ({ pageInfo: { totalCount, usersOnPage = 20, currentPage = 1 }
   }, [perPage]) //set users on Page
 
   const pagesMove = (stepValue) => {
+    debugger
     if (stepValue == -5 && step.left == 0) {
       return null;
     }
@@ -53,7 +54,7 @@ const PagePanel = ({ pageInfo: { totalCount, usersOnPage = 20, currentPage = 1 }
 
   return (
     <div className={styles.pagePanel}>
-      <div onClick={() => changePage(1)}>First</div>
+      <div onClick={() => pagesMove(-step.left)}>First</div>
       <div className={styles.left} onClick={() => pagesMove(-5)}>
         Prev
       </div>
@@ -67,7 +68,7 @@ const PagePanel = ({ pageInfo: { totalCount, usersOnPage = 20, currentPage = 1 }
       <div className={styles.right} onClick={() => pagesMove(5)}>
         Next
       </div>
-      <div onClick={() => changePage(pagesLength)}>Last</div>
+      <div onClick={() => pagesMove(pagesLength-step.right)}>Last</div>
       <div className={styles.select}>
         <select name="" id="" onChange={handleSelect}>
           <option value="20">20</option>
